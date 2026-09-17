@@ -9,12 +9,16 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 var playerReady = false;
 var isMusicPlaying = false;
+var pendingPlayOnReady = false;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtubePlayer', {
         events: {
             'onReady': function() {
                 playerReady = true;
+                if (pendingPlayOnReady) {
+                    playAudio();
+                }
             },
             'onStateChange': function(event) {
                 var btn = document.getElementById('musicToggle');
@@ -30,31 +34,59 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-function toggleAudioPlayback() {
-    if (!playerReady || !player) return;
-    var btn = document.getElementById('musicToggle');
-    try {
-        if (isMusicPlaying) {
-            player.pauseVideo();
-            isMusicPlaying = false;
-            if (btn) btn.classList.remove('playing');
-        } else {
+function playAudio() {
+    var iframe = document.getElementById('youtubePlayer');
+    if (player && typeof player.playVideo === 'function') {
+        try {
             player.playVideo();
             isMusicPlaying = true;
-            if (btn) btn.classList.add('playing');
+        } catch (e) {
+            console.log('player.playVideo failed:', e);
         }
-    } catch (err) {
-        console.log('Audio toggle error:', err);
+    }
+    if (iframe && iframe.contentWindow) {
+        try {
+            iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            isMusicPlaying = true;
+        } catch (e) {}
+    }
+    var btn = document.getElementById('musicToggle');
+    if (btn) btn.classList.add('playing');
+}
+
+function pauseAudio() {
+    var iframe = document.getElementById('youtubePlayer');
+    if (player && typeof player.pauseVideo === 'function') {
+        try { player.pauseVideo(); } catch (e) {}
+    }
+    if (iframe && iframe.contentWindow) {
+        try { iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); } catch (e) {}
+    }
+    isMusicPlaying = false;
+    var btn = document.getElementById('musicToggle');
+    if (btn) btn.classList.remove('playing');
+}
+
+function toggleAudioPlayback() {
+    if (isMusicPlaying) {
+        pauseAudio();
+    } else {
+        playAudio();
     }
 }
 
-// User toggle button listener
+// User toggle button listener (both click and touchend for instant touch responsiveness)
 var musicBtn = document.getElementById('musicToggle');
 if (musicBtn) {
-    musicBtn.addEventListener('click', function(e) {
+    function handleMusicToggle(e) {
         e.stopPropagation();
+        if (e.type === 'touchend' && e.cancelable) {
+            e.preventDefault();
+        }
         toggleAudioPlayback();
-    });
+    }
+    musicBtn.addEventListener('click', handleMusicToggle);
+    musicBtn.addEventListener('touchend', handleMusicToggle, { passive: false });
 }
 
 // ==========================================================================
@@ -195,20 +227,16 @@ function animateButterflyFlight(butterflyObj, targetX, targetY, duration, delay)
 // ==========================================================================
 var transitionTriggered = false;
 
-document.getElementById('openBtn').addEventListener('click', function(e) {
+function triggerInvitationOpen() {
     if (transitionTriggered) return;
     transitionTriggered = true;
     
     // 1. Play Background Music immediately on user touch gesture
     if (playerReady && player) {
-        try {
-            player.playVideo();
-            isMusicPlaying = true;
-            var mBtn = document.getElementById('musicToggle');
-            if (mBtn) mBtn.classList.add('playing');
-        } catch (err) {
-            console.log('Autoplay handled:', err);
-        }
+        playAudio();
+    } else {
+        pendingPlayOnReady = true;
+        playAudio(); // triggers postMessage fallback immediately as well
     }
     
     var cover = document.getElementById('cover');
@@ -229,6 +257,7 @@ document.getElementById('openBtn').addEventListener('click', function(e) {
     
     var viewW = window.innerWidth;
     var viewH = window.innerHeight;
+    var isMobile = viewW <= 600;
     
     // 2. All 12 Roses Start Spinning and Morphing into Butterflies
     var roses = document.querySelectorAll('.rose-flower');
@@ -245,18 +274,16 @@ document.getElementById('openBtn').addEventListener('click', function(e) {
     
     // 3. Erupt Butterflies in a Graceful, Smooth Stream!
     setTimeout(function() {
+        var countPerRose = isMobile ? 1 : 2;
         
-        // A) 24 Butterflies (2 per rose) lifting off smoothly from the floral garland
         rosePositions.forEach(function(pos, rIdx) {
-            spawnBurstSparkles(butterflyContainer, pos.x, pos.y, 3);
+            spawnBurstSparkles(butterflyContainer, pos.x, pos.y, isMobile ? 2 : 3);
             
-            var countPerRose = 2;
             for (var j = 0; j < countPerRose; j++) {
-                var scale = Math.random() * 0.3 + 0.85; // 0.85 to 1.15
+                var scale = Math.random() * 0.3 + 0.85;
                 var startX = pos.x + (Math.random() - 0.5) * 14;
                 var startY = pos.y + (Math.random() - 0.5) * 14;
                 
-                // Destination: soaring upward and fanning out gently
                 var destX = (pos.x < viewW / 2) 
                     ? (Math.random() * -120 - 30) 
                     : (viewW + Math.random() * 120 + 30);
@@ -266,10 +293,8 @@ document.getElementById('openBtn').addEventListener('click', function(e) {
                 }
                 
                 var destY = -viewH * 0.4 - Math.random() * 250;
-                
-                // Long, graceful duration: 3.0s - 4.2s for gentle floating
                 var duration = 3000 + Math.random() * 1200;
-                var delay = j * 60 + rIdx * 35;
+                var delay = j * 60 + rIdx * (isMobile ? 40 : 35);
                 
                 var bf = createMagicButterfly(startX, startY, scale);
                 butterflyContainer.appendChild(bf.el);
@@ -277,45 +302,48 @@ document.getElementById('openBtn').addEventListener('click', function(e) {
             }
         });
         
-        // B) 12 Central Hero Butterflies Swirling Majestically
-        var frameRect = coverFrame.getBoundingClientRect();
-        var centerX = frameRect.left + frameRect.width / 2;
-        var centerY = frameRect.top + frameRect.height / 2;
-        
-        for (var k = 0; k < 12; k++) {
-            var cScale = (k < 3) ? 1.3 : (Math.random() * 0.35 + 0.9);
-            var cStartX = centerX + (Math.random() - 0.5) * 90;
-            var cStartY = centerY + (Math.random() - 0.5) * 70;
-            var cDestX = (Math.random() - 0.5) * (viewW * 1.5) + (viewW / 2);
-            var cDestY = -viewH * 0.45 - Math.random() * 300;
+        // Central Hero Butterflies Swirling Majestically
+        if (coverFrame) {
+            var frameRect = coverFrame.getBoundingClientRect();
+            var centerX = frameRect.left + frameRect.width / 2;
+            var centerY = frameRect.top + frameRect.height / 2;
+            var centralCount = isMobile ? 6 : 12;
             
-            var cDuration = 3200 + Math.random() * 1000;
-            var cDelay = 120 + k * 50;
-            
-            var cBf = createMagicButterfly(cStartX, cStartY, cScale);
-            butterflyContainer.appendChild(cBf.el);
-            animateButterflyFlight(cBf, cDestX, cDestY, cDuration, cDelay);
+            for (var k = 0; k < centralCount; k++) {
+                var cScale = (k < 2) ? 1.25 : (Math.random() * 0.35 + 0.9);
+                var cStartX = centerX + (Math.random() - 0.5) * 70;
+                var cStartY = centerY + (Math.random() - 0.5) * 60;
+                var cDestX = (Math.random() - 0.5) * (viewW * 1.4) + (viewW / 2);
+                var cDestY = -viewH * 0.45 - Math.random() * 280;
+                
+                var cDuration = 3200 + Math.random() * 1000;
+                var cDelay = 120 + k * 60;
+                
+                var cBf = createMagicButterfly(cStartX, cStartY, cScale);
+                butterflyContainer.appendChild(cBf.el);
+                animateButterflyFlight(cBf, cDestX, cDestY, cDuration, cDelay);
+            }
         }
         
     }, 260);
     
     // 4. Smooth Dissolve of the Cover Screen in Light
     setTimeout(function() {
-        cover.classList.add('dissolving');
+        if (cover) cover.classList.add('dissolving');
     }, 600);
     
-    // 5. Unveil the Main Invitation Card
+    // 5. Unveil the Main Invitation Card & Unlock Smooth Document Scrolling
     setTimeout(function() {
-        cover.style.display = 'none';
-        invitation.classList.add('visible');
+        if (cover) cover.style.display = 'none';
+        if (invitation) invitation.classList.add('visible');
+        
+        // Unlock document scrolling for mobile and desktop
+        document.documentElement.classList.add('opened');
+        document.body.classList.add('opened');
         
         setTimeout(function() {
-            invitationCard.classList.add('revealed');
+            if (invitationCard) invitationCard.classList.add('revealed');
         }, 60);
-        
-        setTimeout(function() {
-            document.body.classList.add('opened');
-        }, 400);
         
     }, 950);
     
@@ -325,7 +353,21 @@ document.getElementById('openBtn').addEventListener('click', function(e) {
             butterflyContainer.parentNode.removeChild(butterflyContainer);
         }
     }, 5000);
-});
+}
+
+// User Open Button Event Listeners (both click and touchend for instant mobile activation)
+var openBtn = document.getElementById('openBtn');
+if (openBtn) {
+    function handleOpenAction(e) {
+        if (transitionTriggered) return;
+        if (e && e.type === 'touchend' && e.cancelable) {
+            e.preventDefault();
+        }
+        triggerInvitationOpen();
+    }
+    openBtn.addEventListener('click', handleOpenAction);
+    openBtn.addEventListener('touchend', handleOpenAction, { passive: false });
+}
 
 // ==========================================================================
 // COUNTDOWN TIMER TO THE EVENT (01.11.2026 17:00:00)
