@@ -40,11 +40,11 @@ document.getElementById('openBtn').addEventListener('click', function() {
     }
     
     var cover = document.getElementById('cover');
-    var coverContent = document.querySelector('.cover-content');
+    var coverFrame = document.querySelector('.cover-frame');
     var invitation = document.getElementById('invitation');
     
     // 1. Twirl the roses away and fade text
-    coverContent.classList.add('closing');
+    coverFrame.classList.add('closing');
     
     // 2. Start Butterfly Wipe Transition
     setTimeout(function() {

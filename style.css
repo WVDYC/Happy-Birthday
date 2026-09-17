@@ -4,12 +4,17 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* CRITICAL FIX: prevents the broken mobile scroll */
+    position: relative;
+}
+
 body {
     font-family: 'Cormorant Garamond', serif;
-    background: #050505; /* Deep luxury black */
+    background: #050505;
     color: #e8d0a9;
-    overflow: hidden; 
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,111 +28,103 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 100;
-    overflow: hidden;
-    transition: opacity 1s ease;
 }
 
-.cover-content {
+/* THE SQUARE FRAME */
+.cover-frame {
     position: relative;
-    z-index: 2;
-    text-align: center;
-    background: transparent;
+    border: 2px solid #d4af37;
     padding: 4rem 2rem;
-    max-width: 90%;
-    width: 450px;
+    width: 90%;
+    max-width: 360px;
+    background: transparent;
+    text-align: center;
+    z-index: 2;
+    transition: transform 1s ease, opacity 0.5s ease;
 }
 
-/* SVG Roses & Roots Animation */
-.vine-wrap {
+/* SVG Roses & Roots wrapping the frame */
+.vine-roots {
     position: absolute;
-    width: 250px;
-    height: 350px;
-    z-index: -1;
+    width: 160px;
+    height: 160px;
+    z-index: 3;
     pointer-events: none;
 }
 
 .top-left {
-    top: -50px; left: -50px;
+    top: -40px; left: -40px;
 }
 
 .bottom-right {
-    bottom: -50px; right: -50px;
+    bottom: -40px; right: -40px;
 }
 
 /* Animate the roots/vines drawing themselves */
-.vine-line {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: drawVine 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.root {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: drawRoot 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-@keyframes drawVine {
+@keyframes drawRoot {
     to { stroke-dashoffset: 0; }
 }
 
 /* Animate the leaves and petals blooming */
-.rose-head .petal, .leaf {
+.rose-blossom, .leaf {
     opacity: 0;
     transform: scale(0);
     transform-origin: center;
     animation: popOut 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: 1.5s;
 }
-
-/* Stagger the petals to look like blooming */
-.rose-head .p1 { animation-delay: 1.5s; }
-.rose-head .p2 { animation-delay: 1.8s; }
-.rose-head .p3 { animation-delay: 2.1s; }
-.rose-head .p4 { animation-delay: 2.4s; }
-.leaf { animation-delay: 2.0s; }
 
 @keyframes popOut {
     to { opacity: 1; transform: scale(1); }
 }
 
 /* Closing animations for cover */
-.cover-content.closing .vine-wrap {
-    animation: shrinkAway 1.2s forwards cubic-bezier(0.6, -0.28, 0.735, 0.045);
-}
-
-@keyframes shrinkAway {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(0) rotate(45deg); opacity: 0; }
-}
-
-.cover-content.closing .cover-text-wrapper {
-    transition: opacity 0.5s ease;
+.cover-frame.closing {
+    transform: scale(0.5);
     opacity: 0;
 }
 
 .cover-title {
-    font-size: 3.2rem;
+    font-size: 2.8rem;
     margin-bottom: 0.5rem;
     color: #d4af37;
     font-weight: 600;
     text-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+    position: relative;
+    z-index: 5;
 }
 
 .cover-subtitle {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     margin-bottom: 2.5rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #a38959;
+    position: relative;
+    z-index: 5;
 }
 
 .open-btn {
     font-family: 'Montserrat', sans-serif;
-    background: transparent;
+    background: #050505;
     color: #d4af37;
     border: 1px solid #d4af37;
     padding: 12px 35px;
     font-size: 0.9rem;
-    border-radius: 4px;
+    border-radius: 2px;
     cursor: pointer;
     transition: all 0.4s ease;
     letter-spacing: 2px;
     text-transform: uppercase;
+    position: relative;
+    z-index: 5;
 }
 
 .open-btn:hover {
@@ -162,7 +159,7 @@ body {
     max-width: 550px;
     width: 100%;
     padding: 3rem 2rem;
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(212, 175, 55, 0.2);
     text-align: center;
     position: relative;
@@ -212,7 +209,7 @@ body {
 
 .name {
     font-size: 3rem;
-    color: #d4af37; /* Gold name to pop against black */
+    color: #d4af37;
     margin: 1rem 0;
     font-style: italic;
     font-weight: 600;
@@ -340,7 +337,7 @@ body {
 
 /* Butterfly Wipe Transition Layer */
 .butterfly-wipe {
-    position: fixed;
+    position: absolute; /* FIXED CRASH: Absolute positions within hidden body */
     top: 0; left: -120%;
     width: 150%; height: 100vh;
     background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.1), #1a1a1a, #050505);
@@ -392,10 +389,10 @@ body {
 
 /* Mobile Adjustments */
 @media (max-width: 600px) {
-    .cover-content { padding: 3rem 1.5rem; }
+    .cover-frame { padding: 3rem 1.5rem; max-width: 90%; }
     .cover-title { font-size: 2.2rem; }
     .cover-subtitle { font-size: 0.85rem; }
-    .vine-wrap { width: 180px; height: 250px; }
-    .top-left { top: -20px; left: -20px; }
-    .bottom-right { bottom: -20px; right: -20px; }
+    .vine-roots { width: 140px; height: 140px; }
+    .top-left { top: -30px; left: -30px; }
+    .bottom-right { bottom: -30px; right: -30px; }
 }

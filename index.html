@@ -16,47 +16,57 @@
 
     <!-- Cover Screen -->
     <div id="cover" class="cover-screen">
-        <div class="cover-content">
+        <div class="cover-frame">
             
-            <!-- Left Enveloping Rose with Roots -->
-            <svg class="vine-wrap top-left" viewBox="-100 -100 200 300" xmlns="http://www.w3.org/2000/svg">
-                <!-- Roots/Vines twisting downwards -->
-                <path class="vine-line" d="M 0,0 C 50,50 -30,100 20,150 C 70,200 -10,250 40,300" fill="none" stroke="#d4af37" stroke-width="2.5"/>
-                <path class="vine-line" d="M 0,0 C -50,60 20,120 -20,180 C -60,240 10,280 -30,320" fill="none" stroke="#d4af37" stroke-width="1.5"/>
-                <path class="vine-line" d="M 0,0 C 80,40 20,150 90,200" fill="none" stroke="#d4af37" stroke-width="1"/>
+            <!-- Code-based Roses with Roots (Top Left) -->
+            <svg class="vine-roots top-left" viewBox="-50 -50 150 150" xmlns="http://www.w3.org/2000/svg">
+                <!-- Roots / Vines twisting around the frame corner -->
+                <path class="root" d="M -50,-20 Q 20,-20 20,50 T 20,150" fill="none" stroke="#d4af37" stroke-width="2"/>
+                <path class="root" d="M -20,-50 Q -20,20 50,20 T 150,20" fill="none" stroke="#d4af37" stroke-width="2"/>
+                <path class="root" d="M 0,0 C 40,0 0,40 40,40 C 60,40 40,80 80,80" fill="none" stroke="#d4af37" stroke-width="1.5"/>
                 
-                <!-- Leaves on vines -->
-                <path class="leaf" d="M 20,150 C 40,140 50,160 30,170 C 10,160 10,140 20,150 Z" fill="#050505" stroke="#d4af37"/>
-                <path class="leaf" d="M -20,180 C -40,170 -50,190 -30,200 C -10,190 -10,170 -20,180 Z" fill="#050505" stroke="#d4af37"/>
-                <path class="leaf" d="M 40,80 C 60,70 70,90 50,100 C 30,90 30,70 40,80 Z" fill="#050505" stroke="#d4af37"/>
-
-                <!-- Rose Head -->
-                <g class="rose-head" transform="rotate(-15)">
-                    <path class="petal p1" d="M 0,-50 C 40,-50 60,-10 40,30 C 10,60 -30,50 -50,20 C -60,-10 -40,-50 0,-50 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
-                    <path class="petal p2" d="M 0,-35 C 25,-35 40,-5 25,20 C 5,40 -20,35 -35,15 C -40,-5 -25,-35 0,-35 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
-                    <path class="petal p3" d="M 0,-20 C 15,-20 25,-5 15,10 C 5,20 -15,15 -20,5 C -25,-5 -15,-20 0,-20 Z" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
-                    <path class="petal p4" d="M 0,-8 C 6,-8 10,0 6,8 C 0,12 -8,8 -10,0 C -12,-4 -6,-8 0,-8 Z" fill="#d4af37"/>
+                <!-- Leaves -->
+                <path class="leaf" d="M 20,50 C 35,45 40,55 30,60 C 15,65 10,55 20,50 Z" fill="#050505" stroke="#d4af37"/>
+                <path class="leaf" d="M 50,20 C 45,35 55,40 60,30 C 65,15 55,10 50,20 Z" fill="#050505" stroke="#d4af37"/>
+                
+                <!-- Heraldic Rose -->
+                <g class="rose-blossom" transform="translate(10, 10)">
+                    <path d="M0 -30 C20 -30 30 -10 20 10 C30 10 30 30 10 30 C10 40 -10 40 -10 30 C-30 30 -30 10 -20 10 C-30 -10 -20 -30 0 -30 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
+                    <path d="M0 -20 C15 -20 20 -5 10 5 C20 10 15 25 0 20 C-15 25 -20 10 -10 5 C-20 -5 -15 -20 0 -20 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
+                    <path d="M0 -10 C5 -10 10 0 5 5 C10 10 0 15 -5 5 C-10 0 -5 -10 0 -10 Z" fill="#222" stroke="#d4af37" stroke-width="1"/>
+                    <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+                </g>
+                <g class="rose-blossom" transform="translate(50, 60) scale(0.6) rotate(45)">
+                    <path d="M0 -30 C20 -30 30 -10 20 10 C30 10 30 30 10 30 C10 40 -10 40 -10 30 C-30 30 -30 10 -20 10 C-30 -10 -20 -30 0 -30 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
+                    <path d="M0 -20 C15 -20 20 -5 10 5 C20 10 15 25 0 20 C-15 25 -20 10 -10 5 C-20 -5 -15 -20 0 -20 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
+                    <path d="M0 -10 C5 -10 10 0 5 5 C10 10 0 15 -5 5 C-10 0 -5 -10 0 -10 Z" fill="#222" stroke="#d4af37" stroke-width="1"/>
+                    <circle cx="0" cy="0" r="3" fill="#d4af37"/>
                 </g>
             </svg>
 
-            <!-- Right Enveloping Rose with Roots -->
-            <svg class="vine-wrap bottom-right" viewBox="-100 -150 200 300" xmlns="http://www.w3.org/2000/svg">
-                <!-- Roots/Vines twisting upwards -->
-                <path class="vine-line" d="M 0,0 C -50,-50 30,-100 -20,-150 C -70,-200 10,-250 -40,-300" fill="none" stroke="#d4af37" stroke-width="2.5"/>
-                <path class="vine-line" d="M 0,0 C 50,-60 -20,-120 20,-180 C 60,-240 -10,-280 30,-320" fill="none" stroke="#d4af37" stroke-width="1.5"/>
-                <path class="vine-line" d="M 0,0 C -80,-40 -20,-150 -90,-200" fill="none" stroke="#d4af37" stroke-width="1"/>
+            <!-- Code-based Roses with Roots (Bottom Right) -->
+            <svg class="vine-roots bottom-right" viewBox="-50 -50 150 150" xmlns="http://www.w3.org/2000/svg">
+                <!-- Roots / Vines twisting around the frame corner -->
+                <path class="root" d="M 150,120 Q 80,120 80,50 T 80,-50" fill="none" stroke="#d4af37" stroke-width="2"/>
+                <path class="root" d="M 120,150 Q 120,80 50,80 T -50,80" fill="none" stroke="#d4af37" stroke-width="2"/>
+                <path class="root" d="M 100,100 C 60,100 100,60 60,60 C 40,60 60,20 20,20" fill="none" stroke="#d4af37" stroke-width="1.5"/>
                 
-                <!-- Leaves on vines -->
-                <path class="leaf" d="M -20,-150 C -40,-140 -50,-160 -30,-170 C -10,-160 -10,-140 -20,-150 Z" fill="#050505" stroke="#d4af37"/>
-                <path class="leaf" d="M 20,-180 C 40,-170 50,-190 30,-200 C 10,-190 10,-170 20,-180 Z" fill="#050505" stroke="#d4af37"/>
-                <path class="leaf" d="M -40,-80 C -60,-70 -70,-90 -50,-100 C -30,-90 -30,-70 -40,-80 Z" fill="#050505" stroke="#d4af37"/>
+                <!-- Leaves -->
+                <path class="leaf" d="M 80,50 C 65,55 60,45 70,40 C 85,35 90,45 80,50 Z" fill="#050505" stroke="#d4af37"/>
+                <path class="leaf" d="M 50,80 C 55,65 45,60 40,70 C 35,85 45,90 50,80 Z" fill="#050505" stroke="#d4af37"/>
 
-                <!-- Rose Head -->
-                <g class="rose-head" transform="rotate(165)">
-                    <path class="petal p1" d="M 0,-50 C 40,-50 60,-10 40,30 C 10,60 -30,50 -50,20 C -60,-10 -40,-50 0,-50 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
-                    <path class="petal p2" d="M 0,-35 C 25,-35 40,-5 25,20 C 5,40 -20,35 -35,15 C -40,-5 -25,-35 0,-35 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
-                    <path class="petal p3" d="M 0,-20 C 15,-20 25,-5 15,10 C 5,20 -15,15 -20,5 C -25,-5 -15,-20 0,-20 Z" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
-                    <path class="petal p4" d="M 0,-8 C 6,-8 10,0 6,8 C 0,12 -8,8 -10,0 C -12,-4 -6,-8 0,-8 Z" fill="#d4af37"/>
+                <!-- Heraldic Rose -->
+                <g class="rose-blossom" transform="translate(90, 90)">
+                    <path d="M0 -30 C20 -30 30 -10 20 10 C30 10 30 30 10 30 C10 40 -10 40 -10 30 C-30 30 -30 10 -20 10 C-30 -10 -20 -30 0 -30 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
+                    <path d="M0 -20 C15 -20 20 -5 10 5 C20 10 15 25 0 20 C-15 25 -20 10 -10 5 C-20 -5 -15 -20 0 -20 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
+                    <path d="M0 -10 C5 -10 10 0 5 5 C10 10 0 15 -5 5 C-10 0 -5 -10 0 -10 Z" fill="#222" stroke="#d4af37" stroke-width="1"/>
+                    <circle cx="0" cy="0" r="3" fill="#d4af37"/>
+                </g>
+                <g class="rose-blossom" transform="translate(50, 40) scale(0.6) rotate(-45)">
+                    <path d="M0 -30 C20 -30 30 -10 20 10 C30 10 30 30 10 30 C10 40 -10 40 -10 30 C-30 30 -30 10 -20 10 C-30 -10 -20 -30 0 -30 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
+                    <path d="M0 -20 C15 -20 20 -5 10 5 C20 10 15 25 0 20 C-15 25 -20 10 -10 5 C-20 -5 -15 -20 0 -20 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
+                    <path d="M0 -10 C5 -10 10 0 5 5 C10 10 0 15 -5 5 C-10 0 -5 -10 0 -10 Z" fill="#222" stroke="#d4af37" stroke-width="1"/>
+                    <circle cx="0" cy="0" r="3" fill="#d4af37"/>
                 </g>
             </svg>
 
