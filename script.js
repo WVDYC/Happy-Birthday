@@ -15,98 +15,90 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// Gold Sparkles Generator
+// Sparkles logic
 function createSparkle() {
     const effectsContainer = document.getElementById('effects');
     if (!effectsContainer) return;
-    
     const sparkle = document.createElement('div');
     sparkle.classList.add('sparkle');
-    
-    // Randomize horizontal position
     sparkle.style.left = Math.random() * 100 + 'vw';
-    
-    // Randomize duration between 6s and 12s for slow elegant floating
     sparkle.style.animationDuration = (Math.random() * 6 + 6) + 's'; 
-    
-    // Slight size variations
     const scale = Math.random() * 0.8 + 0.5;
     sparkle.style.width = (3 * scale) + 'px';
     sparkle.style.height = (3 * scale) + 'px';
-    
     effectsContainer.appendChild(sparkle);
-    
-    // Remove after animation completes
-    setTimeout(() => {
-        if (sparkle.parentNode) {
-            sparkle.parentNode.removeChild(sparkle);
-        }
-    }, 12000);
+    setTimeout(() => { if (sparkle.parentNode) sparkle.parentNode.removeChild(sparkle); }, 12000);
 }
+setInterval(createSparkle, 300); 
 
-// Start falling gold sparkles immediately (shows over the cover too)
-setInterval(createSparkle, 250); // spawn a new sparkle every 250ms
-
-// Cover Button Click Logic
+// Open Button and Butterfly Transition
 document.getElementById('openBtn').addEventListener('click', function() {
-    // 1. Play Music
+    
+    // Play music
     if (playerReady && typeof player.playVideo === 'function') {
         player.playVideo();
     }
     
     var cover = document.getElementById('cover');
+    var coverContent = document.querySelector('.cover-content');
     var invitation = document.getElementById('invitation');
     
-    // 2. Elegant transition: fade text first, then slide screen up
-    cover.classList.add('fade-out-content');
+    // 1. Twirl the roses away and fade text
+    coverContent.classList.add('closing');
     
+    // 2. Start Butterfly Wipe Transition
     setTimeout(function() {
-        cover.classList.add('slide-up');
+        const wipe = document.createElement('div');
+        wipe.className = 'butterfly-wipe wipe-active';
         
-        // Show Invitation underneath
-        invitation.classList.add('visible');
+        // Spawn butterflies on the wipe
+        for (let i = 0; i < 20; i++) {
+            let b = document.createElement('div');
+            b.className = 'flying-butterfly';
+            b.style.top = Math.random() * 100 + 'vh';
+            b.style.left = (Math.random() * 50) + '%'; 
+            b.style.animationDelay = (Math.random() * 0.2) + 's';
+            wipe.appendChild(b);
+        }
+        document.body.appendChild(wipe);
         
-        // Add opened class to trigger text fadeUp staggered animations
+        // 3. Swap the views when the wipe is fully covering the screen (around 800ms)
         setTimeout(function() {
-            document.body.classList.add('opened');
+            cover.style.display = 'none';
+            invitation.classList.add('visible');
             
-            // Clean up cover from DOM
-            setTimeout(() => {
-                cover.style.display = 'none';
-            }, 1000);
+            // Trigger internal staggered animations
+            setTimeout(function() {
+                document.body.classList.add('opened');
+            }, 100);
             
-        }, 300); // slight delay before internal text starts animating
+        }, 800);
         
-    }, 600); // wait for cover content to fade
+        // 4. Remove wipe after it finishes crossing
+        setTimeout(function() {
+            wipe.remove();
+        }, 2000);
+        
+    }, 400); // Wait briefly for the roses to twirl out before wiping
 });
 
 // Countdown Timer Logic
 function initCountdown() {
-    // Set the date we're counting down to: November 1, 2026, 17:00:00
     const countDownDate = new Date("Nov 1, 2026 17:00:00").getTime();
-
-    // Update the count down every 1 second
     const x = setInterval(function() {
-
-        // Get today's date and time
         const now = new Date().getTime();
-
-        // Find the distance between now and the count down date
         const distance = countDownDate - now;
 
-        // Time calculations for days, hours, minutes and seconds
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Display the result in the elements
         document.getElementById("days").innerText = days < 10 ? "0" + days : days;
         document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
         document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
         document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
 
-        // If the count down is finished, write some text
         if (distance < 0) {
             clearInterval(x);
             document.getElementById("countdown").innerHTML = "<h3 style='color: #ab8537; font-family: Montserrat; font-size: 1.2rem; text-transform: uppercase;'>Той басталды!</h3>";
@@ -114,6 +106,4 @@ function initCountdown() {
         }
     }, 1000);
 }
-
-// Start countdown
 initCountdown();

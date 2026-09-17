@@ -2,7 +2,7 @@
 <html lang="kk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Зейнеп Аменова - 70 жас мерейтойы</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,14 +11,55 @@
 </head>
 <body>
 
-    <!-- Global Effect Container for Gold Sparkles (Starts immediately) -->
+    <!-- Global Effect Container for Gold Sparkles -->
     <div class="effect-container" id="effects"></div>
 
     <!-- Cover Screen -->
     <div id="cover" class="cover-screen">
-        <div class="cover-bg"></div>
         <div class="cover-content">
-            <div class="roses-overlay"></div>
+            
+            <!-- Left Enveloping Rose with Roots -->
+            <svg class="vine-wrap top-left" viewBox="-100 -100 200 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Roots/Vines twisting downwards -->
+                <path class="vine-line" d="M 0,0 C 50,50 -30,100 20,150 C 70,200 -10,250 40,300" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+                <path class="vine-line" d="M 0,0 C -50,60 20,120 -20,180 C -60,240 10,280 -30,320" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                <path class="vine-line" d="M 0,0 C 80,40 20,150 90,200" fill="none" stroke="#d4af37" stroke-width="1"/>
+                
+                <!-- Leaves on vines -->
+                <path class="leaf" d="M 20,150 C 40,140 50,160 30,170 C 10,160 10,140 20,150 Z" fill="#050505" stroke="#d4af37"/>
+                <path class="leaf" d="M -20,180 C -40,170 -50,190 -30,200 C -10,190 -10,170 -20,180 Z" fill="#050505" stroke="#d4af37"/>
+                <path class="leaf" d="M 40,80 C 60,70 70,90 50,100 C 30,90 30,70 40,80 Z" fill="#050505" stroke="#d4af37"/>
+
+                <!-- Rose Head -->
+                <g class="rose-head" transform="rotate(-15)">
+                    <path class="petal p1" d="M 0,-50 C 40,-50 60,-10 40,30 C 10,60 -30,50 -50,20 C -60,-10 -40,-50 0,-50 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
+                    <path class="petal p2" d="M 0,-35 C 25,-35 40,-5 25,20 C 5,40 -20,35 -35,15 C -40,-5 -25,-35 0,-35 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
+                    <path class="petal p3" d="M 0,-20 C 15,-20 25,-5 15,10 C 5,20 -15,15 -20,5 C -25,-5 -15,-20 0,-20 Z" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
+                    <path class="petal p4" d="M 0,-8 C 6,-8 10,0 6,8 C 0,12 -8,8 -10,0 C -12,-4 -6,-8 0,-8 Z" fill="#d4af37"/>
+                </g>
+            </svg>
+
+            <!-- Right Enveloping Rose with Roots -->
+            <svg class="vine-wrap bottom-right" viewBox="-100 -150 200 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Roots/Vines twisting upwards -->
+                <path class="vine-line" d="M 0,0 C -50,-50 30,-100 -20,-150 C -70,-200 10,-250 -40,-300" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+                <path class="vine-line" d="M 0,0 C 50,-60 -20,-120 20,-180 C 60,-240 -10,-280 30,-320" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                <path class="vine-line" d="M 0,0 C -80,-40 -20,-150 -90,-200" fill="none" stroke="#d4af37" stroke-width="1"/>
+                
+                <!-- Leaves on vines -->
+                <path class="leaf" d="M -20,-150 C -40,-140 -50,-160 -30,-170 C -10,-160 -10,-140 -20,-150 Z" fill="#050505" stroke="#d4af37"/>
+                <path class="leaf" d="M 20,-180 C 40,-170 50,-190 30,-200 C 10,-190 10,-170 20,-180 Z" fill="#050505" stroke="#d4af37"/>
+                <path class="leaf" d="M -40,-80 C -60,-70 -70,-90 -50,-100 C -30,-90 -30,-70 -40,-80 Z" fill="#050505" stroke="#d4af37"/>
+
+                <!-- Rose Head -->
+                <g class="rose-head" transform="rotate(165)">
+                    <path class="petal p1" d="M 0,-50 C 40,-50 60,-10 40,30 C 10,60 -30,50 -50,20 C -60,-10 -40,-50 0,-50 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
+                    <path class="petal p2" d="M 0,-35 C 25,-35 40,-5 25,20 C 5,40 -20,35 -35,15 C -40,-5 -25,-35 0,-35 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
+                    <path class="petal p3" d="M 0,-20 C 15,-20 25,-5 15,10 C 5,20 -15,15 -20,5 C -25,-5 -15,-20 0,-20 Z" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
+                    <path class="petal p4" d="M 0,-8 C 6,-8 10,0 6,8 C 0,12 -8,8 -10,0 C -12,-4 -6,-8 0,-8 Z" fill="#d4af37"/>
+                </g>
+            </svg>
+
             <div class="cover-text-wrapper">
                 <h1 class="cover-title">Шақыру билеті</h1>
                 <p class="cover-subtitle">Зейнеп Аменованың<br>70 жасқа толған мерейтойы</p>
@@ -29,9 +70,7 @@
 
     <!-- Main Invitation -->
     <div id="invitation" class="invitation-container">
-        
         <div class="invitation-card">
-            <div class="card-border"></div>
             
             <div class="age-accent">70</div>
             
@@ -59,7 +98,7 @@
                 <div class="detail-item detail-3">
                     <h3>Мекен-жайы</h3>
                     <p>Астана қаласы<br>«Томирис» мейрамханасы</p>
-                    <a href="https://2gis.kz/astana/geo/70000001047392718/71.510061,51.140464" target="_blank" class="map-btn">Картадан көру (2GIS)</a>
+                    <a href="https://2gis.kz/astana/geo/70000001047392718/71.510061,51.140464" target="_blank" class="map-btn">Картадан көру</a>
                 </div>
                 
                 <!-- Countdown Timer -->
@@ -84,7 +123,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             
             <div class="footer-text">
@@ -93,7 +131,7 @@
         </div>
     </div>
 
-    <!-- Hidden YouTube Audio Player (Changed to lyrical Happy Birthday) -->
+    <!-- Hidden YouTube Audio Player -->
     <div id="player-container">
         <iframe id="youtubePlayer" 
                 src="https://www.youtube.com/embed?listType=search&list=Туған+күніңмен+лирическая+версия+ән&enablejsapi=1&loop=1" 
