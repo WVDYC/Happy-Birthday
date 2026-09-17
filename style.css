@@ -39,7 +39,7 @@ body.opened {
 .bg-atmosphere {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% 35%, #ffffff 0%, #faf5ec 55%, #ede2d0 100%);
+    background: radial-gradient(ellipse at 50% 45%, #ffffff 0%, #faf4e8 38%, #f3e2ca 72%, #dfc8a8 100%);
     pointer-events: none;
     z-index: 1;
 }
@@ -56,9 +56,9 @@ body.opened {
 .sparkle {
     position: absolute;
     bottom: -10px;
-    background: radial-gradient(circle, #fff7c2 10%, #d4af37 60%, transparent 80%);
+    background: radial-gradient(circle, #ffffff 15%, #ffe266 50%, #d4af37 75%, transparent 100%);
     border-radius: 50%;
-    box-shadow: 0 0 6px 1px rgba(212, 175, 55, 0.45);
+    box-shadow: 0 0 8px 2px rgba(240, 195, 50, 0.7);
     animation: floatUp linear forwards;
     opacity: 0;
     will-change: transform, opacity;
@@ -171,22 +171,27 @@ body.opened {
     pointer-events: none;
 }
 
-/* The Central Decorative Frame */
+/* The Central Decorative Frame (Elegant Vertical Portrait Rectangle) */
 .cover-frame {
     position: relative;
-    border: 2px solid #c99f32;
-    padding: 3.8rem 2.2rem;
-    width: 88%;
-    max-width: 370px;
+    border: 2px solid #d4af37;
+    padding: 3.6rem 1.8rem 3.2rem;
+    width: 84%;
+    max-width: 350px;
+    min-height: 490px;
     text-align: center;
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-radius: 4px;
-    box-shadow: 0 15px 50px rgba(180, 145, 95, 0.25),
-                inset 0 0 25px rgba(212, 175, 55, 0.08),
-                0 0 25px rgba(212, 175, 55, 0.2);
+    border-radius: 6px;
+    box-shadow: 0 18px 55px rgba(160, 120, 45, 0.28),
+                0 0 35px rgba(212, 175, 55, 0.3),
+                inset 0 0 30px rgba(255, 245, 220, 0.6);
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
 
@@ -195,8 +200,8 @@ body.opened {
     content: '';
     position: absolute;
     top: 6px; left: 6px; right: 6px; bottom: 6px;
-    border: 1px solid rgba(201, 159, 50, 0.4);
-    border-radius: 2px;
+    border: 1.2px solid rgba(212, 175, 55, 0.5);
+    border-radius: 3px;
     pointer-events: none;
 }
 
@@ -204,8 +209,8 @@ body.opened {
     content: '';
     position: absolute;
     top: -6px; left: -6px; right: -6px; bottom: -6px;
-    border: 1px solid rgba(201, 159, 50, 0.25);
-    border-radius: 6px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
     pointer-events: none;
 }
 
@@ -260,8 +265,8 @@ body.opened {
     pointer-events: none !important;
     user-select: none;
     -webkit-user-select: none;
-    /* Bright luminous rose with zero halo and warm glowing aura */
-    filter: brightness(1.14) saturate(1.1) drop-shadow(0 4px 14px rgba(255, 175, 185, 0.45)) drop-shadow(0 0 12px rgba(255, 225, 140, 0.55));
+    /* Rich, vibrant royal pink roses with crisp petal definition and warm golden aura */
+    filter: contrast(1.1) saturate(1.22) drop-shadow(0 4px 10px rgba(180, 105, 25, 0.4)) drop-shadow(0 2px 8px rgba(235, 110, 135, 0.5));
     transform-origin: center center;
     opacity: 0;
     transform: scale(0) rotate(-360deg);
@@ -274,17 +279,17 @@ body.opened {
     0% {
         opacity: 0;
         transform: scale(0) rotate(-360deg);
-        filter: brightness(2.2) drop-shadow(0 0 25px #ffd700);
+        filter: brightness(1.7) drop-shadow(0 0 22px #ffd700);
     }
     65% {
         opacity: 1;
         transform: scale(1.14) rotate(15deg);
-        filter: brightness(1.22) drop-shadow(0 0 16px rgba(255, 215, 120, 0.7));
+        filter: contrast(1.12) saturate(1.25) drop-shadow(0 0 16px rgba(255, 215, 120, 0.7));
     }
     100% {
         opacity: 1;
         transform: scale(1) rotate(0deg);
-        filter: brightness(1.14) saturate(1.1) drop-shadow(0 4px 14px rgba(255, 175, 185, 0.45)) drop-shadow(0 0 12px rgba(255, 225, 140, 0.55));
+        filter: contrast(1.1) saturate(1.22) drop-shadow(0 4px 10px rgba(180, 105, 25, 0.4)) drop-shadow(0 2px 8px rgba(235, 110, 135, 0.5));
     }
 }
 
@@ -360,59 +365,87 @@ body.opened {
    ========================================================================== */
 .cover-emblem {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 3px;
-    color: #9e7924;
-    margin-bottom: 0.8rem;
+    font-size: 0.76rem;
+    letter-spacing: 3.5px;
+    color: #8c6819;
+    margin-bottom: 0.9rem;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .cover-title {
-    font-size: 2.9rem;
-    line-height: 1.1;
-    margin-bottom: 0.6rem;
+    line-height: 1.06;
+    margin-bottom: 0.8rem;
     color: #231c15;
-    font-weight: 600;
     text-shadow: 0 2px 20px rgba(212, 175, 55, 0.25);
-    letter-spacing: 1px;
+}
+
+.title-top {
+    display: block;
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: #1f1810;
+}
+
+.title-bottom {
+    display: block;
+    font-size: 2.3rem;
+    font-weight: 500;
+    font-style: italic;
+    color: #8c6819;
+    letter-spacing: 2px;
+    margin-top: 0.2rem;
 }
 
 .cover-divider {
-    width: 60px;
+    width: 76px;
     height: 1.5px;
-    background: linear-gradient(90deg, transparent, #c99f32, transparent);
-    margin: 0.6rem auto 1rem;
+    background: linear-gradient(90deg, transparent, #c99f32 50%, transparent);
+    margin: 0.8rem auto 1.3rem;
+    position: relative;
+}
+
+.cover-divider::after {
+    content: '◆';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.55rem;
+    color: #c99f32;
+    background: #ffffff;
+    padding: 0 5px;
 }
 
 .cover-subtitle {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    margin-bottom: 2.4rem;
-    letter-spacing: 1.5px;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    margin-bottom: 2.2rem;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
-    color: #5e4d35;
-    font-weight: 400;
+    color: #4a3a22;
+    font-weight: 500;
 }
 
-/* Luxury Interactive Button */
+/* Luxury Interactive Button (Gleaming Royal Gold) */
 .open-btn {
     position: relative;
     font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, #d4af37 0%, #b88d22 100%);
+    background: linear-gradient(135deg, #f6e299 0%, #e2b944 25%, #c89524 60%, #9e7011 100%);
     color: #ffffff;
-    border: 1.5px solid #fff0a0;
-    padding: 14px 44px;
-    font-size: 0.95rem;
-    border-radius: 3px;
+    text-shadow: 0 1px 3px rgba(70, 45, 5, 0.7);
+    border: 1.5px solid #fff4be;
+    padding: 14px 46px;
+    font-size: 0.98rem;
+    border-radius: 4px;
     cursor: pointer;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
     overflow: hidden;
     transition: all 0.35s ease;
-    box-shadow: 0 5px 20px rgba(180, 140, 50, 0.45), 0 0 15px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 8px 24px rgba(180, 130, 25, 0.45), 0 0 16px rgba(246, 226, 153, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.6);
     z-index: 50 !important;
     pointer-events: auto !important;
     touch-action: manipulation;
@@ -426,8 +459,8 @@ body.opened {
 }
 
 .open-btn:hover, .open-btn:active {
-    background: linear-gradient(135deg, #e5be49 0%, #c99b28 100%);
-    box-shadow: 0 0 35px rgba(235, 195, 80, 0.85);
+    background: linear-gradient(135deg, #faebb2 0%, #ecc658 25%, #d4a332 60%, #ab7c17 100%);
+    box-shadow: 0 0 35px rgba(235, 195, 80, 0.9), 0 8px 25px rgba(180, 130, 25, 0.5);
     transform: translateY(-2px) scale(1.03);
 }
 
@@ -802,32 +835,39 @@ body.opened {
     }
 
     .cover-frame {
-        width: min(84vw, 340px);
-        padding: 2.6rem 1.2rem;
+        width: min(80vw, 325px);
+        min-height: 485px;
+        padding: 3rem 1.4rem 2.8rem;
         margin: auto;
     }
     .cover-emblem {
-        font-size: 0.7rem;
-        letter-spacing: 2px;
-        margin-bottom: 0.6rem;
+        font-size: 0.72rem;
+        letter-spacing: 2.5px;
+        margin-bottom: 0.8rem;
     }
-    .cover-title {
-        font-size: 2.2rem;
-        line-height: 1.12;
-        margin-bottom: 0.4rem;
+    .title-top {
+        font-size: 2.35rem;
+        letter-spacing: 2px;
+    }
+    .title-bottom {
+        font-size: 1.95rem;
+        letter-spacing: 2px;
+        margin-top: 0.2rem;
     }
     .cover-divider {
-        margin: 0.5rem auto 0.8rem;
+        width: 65px;
+        margin: 0.8rem auto 1.2rem;
     }
     .cover-subtitle {
-        font-size: 0.78rem;
-        line-height: 1.5;
-        margin-bottom: 1.6rem;
+        font-size: 0.76rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        letter-spacing: 1.5px;
     }
     .open-btn {
-        padding: 13px 38px;
-        font-size: 0.88rem;
-        letter-spacing: 2.5px;
+        padding: 13px 40px;
+        font-size: 0.92rem;
+        letter-spacing: 3.5px;
     }
 
     /* Precisely scaled roses so they stay 100% inside mobile viewport without horizontal overflow */
