@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 60" width="80" height="60">
+  <defs>
+    <linearGradient id="bfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff6c7"/>
+      <stop offset="35%" stop-color="#f0cb64"/>
+      <stop offset="70%" stop-color="#c99824"/>
+      <stop offset="100%" stop-color="#734e06"/>
+    </linearGradient>
+    <linearGradient id="bfVein" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffe885" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="bfGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#ffd700" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Left Wing -->
+  <g class="wing wing-l">
+    <!-- Forewing Upper Left -->
+    <path d="M 40,28 C 36,20 25,6 12,5 C 2,4 -1,15 4,24 C 8,31 18,36 38,32 Z" 
+          fill="url(#bfGrad)" stroke="#ffe885" stroke-width="0.8"/>
+    <!-- Hindwing Lower Left -->
+    <path d="M 38,32 C 24,35 12,42 16,52 C 20,59 30,57 37,42 C 39,38 39,34 38,32 Z" 
+          fill="url(#bfGrad)" stroke="#ffe885" stroke-width="0.7"/>
+    <!-- Wing Vein Filigree -->
+    <path d="M 38,29 C 28,24 18,17 12,8 M 38,29 C 26,27 15,26 8,22 M 38,32 C 28,37 20,44 19,50" 
+          fill="none" stroke="url(#bfVein)" stroke-width="0.6" stroke-linecap="round"/>
+    <!-- Wing edge dots -->
+    <circle cx="6" cy="18" r="1" fill="#fff"/>
+    <circle cx="10" cy="27" r="1" fill="#fff"/>
+    <circle cx="18" cy="51" r="0.9" fill="#fff"/>
+  </g>
+
+  <!-- Right Wing -->
+  <g class="wing wing-r">
+    <!-- Forewing Upper Right -->
+    <path d="M 40,28 C 44,20 55,6 68,5 C 78,4 81,15 76,24 C 72,31 62,36 42,32 Z" 
+          fill="url(#bfGrad)" stroke="#ffe885" stroke-width="0.8"/>
+    <!-- Hindwing Lower Right -->
+    <path d="M 42,32 C 56,35 68,42 64,52 C 60,59 50,57 43,42 C 41,38 41,34 42,32 Z" 
+          fill="url(#bfGrad)" stroke="#ffe885" stroke-width="0.7"/>
+    <!-- Wing Vein Filigree -->
+    <path d="M 42,29 C 52,24 62,17 68,8 M 42,29 C 54,27 65,26 72,22 M 42,32 C 52,37 60,44 61,50" 
+          fill="none" stroke="url(#bfVein)" stroke-width="0.6" stroke-linecap="round"/>
+    <!-- Wing edge dots -->
+    <circle cx="74" cy="18" r="1" fill="#fff"/>
+    <circle cx="70" cy="27" r="1" fill="#fff"/>
+    <circle cx="62" cy="51" r="0.9" fill="#fff"/>
+  </g>
+
+  <!-- Butterfly Center Body & Antennae -->
+  <g class="body">
+    <!-- Antennae -->
+    <path d="M 39,22 C 37,16 32,10 27,9 M 41,22 C 43,16 48,10 53,9" fill="none" stroke="#fff0aa" stroke-width="0.8" stroke-linecap="round"/>
+    <circle cx="27" cy="9" r="1" fill="#fff0aa"/>
+    <circle cx="53" cy="9" r="1" fill="#fff0aa"/>
+    <!-- Thorax & Abdomen -->
+    <ellipse cx="40" cy="33" rx="2" ry="9" fill="#543803" stroke="#ffd700" stroke-width="0.6"/>
+    <circle cx="40" cy="23" r="2.2" fill="#ffd700"/>
+  </g>
+</svg>

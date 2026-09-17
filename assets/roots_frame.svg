@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" width="100%" height="100%" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="rootGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#edd282"/>
+      <stop offset="30%" stop-color="#c99f32"/>
+      <stop offset="70%" stop-color="#8c6819"/>
+      <stop offset="100%" stop-color="#4d3707"/>
+    </linearGradient>
+    <linearGradient id="rootLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fff4b8"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#917019"/>
+    </linearGradient>
+    <filter id="rootShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#rootShadow)">
+    <!-- ================= TOP ROOTS ================= -->
+    <!-- Primary heavy root along top border (y around 20) -->
+    <path class="root-line" d="M 15,20 C 60,14 110,26 160,18 C 210,12 260,25 310,17 C 350,22 385,18 395,20" 
+          fill="none" stroke="url(#rootGold)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Secondary entwining root -->
+    <path class="root-line" d="M 5,24 C 45,28 95,14 145,22 C 195,28 245,15 295,23 C 345,16 375,25 395,20" 
+          fill="none" stroke="url(#rootLight)" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- Top fine tendrils / roots shooting out -->
+    <path class="root-line" d="M 70,18 C 85,8 98,6 108,12 M 220,16 C 235,6 248,5 258,10 M 330,19 C 345,10 358,8 368,14" 
+          fill="none" stroke="url(#rootLight)" stroke-width="1.2" stroke-linecap="round"/>
+    <path class="root-line" d="M 130,22 C 145,30 155,34 165,30 M 275,22 C 290,32 302,32 312,28" 
+          fill="none" stroke="url(#rootGold)" stroke-width="1.2" stroke-linecap="round"/>
+
+    <!-- ================= BOTTOM ROOTS ================= -->
+    <!-- Primary heavy root along bottom border (y around 500) -->
+    <path class="root-line" d="M 15,500 C 60,506 110,494 160,502 C 210,508 260,495 310,503 C 350,498 385,502 395,500" 
+          fill="none" stroke="url(#rootGold)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Secondary entwining root -->
+    <path class="root-line" d="M 5,496 C 45,492 95,506 145,498 C 195,492 245,505 295,497 C 345,504 375,495 395,500" 
+          fill="none" stroke="url(#rootLight)" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- Bottom fine tendrils / roots spreading into earth -->
+    <path class="root-line" d="M 65,502 C 75,512 85,518 95,514 M 180,502 C 192,514 205,516 215,510 M 320,501 C 332,512 345,515 355,508" 
+          fill="none" stroke="url(#rootGold)" stroke-width="1.2" stroke-linecap="round"/>
+    <path class="root-line" d="M 120,498 C 130,488 142,486 150,490 M 250,497 C 262,486 275,488 285,492" 
+          fill="none" stroke="url(#rootLight)" stroke-width="1.2" stroke-linecap="round"/>
+
+    <!-- ================= LEFT ROOTS ================= -->
+    <!-- Primary heavy root along left border (x around 20) -->
+    <path class="root-line" d="M 20,15 C 14,70 26,140 18,210 C 12,280 25,350 17,420 C 22,465 18,495 20,505" 
+          fill="none" stroke="url(#rootGold)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Secondary entwining root -->
+    <path class="root-line" d="M 24,5 C 28,60 14,130 22,200 C 28,270 15,340 23,410 C 16,460 25,495 20,515" 
+          fill="none" stroke="url(#rootLight)" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- Left tendrils -->
+    <path class="root-line" d="M 18,90 C 8,105 6,118 12,128 M 16,240 C 6,255 5,268 10,278 M 19,370 C 8,385 8,398 14,408" 
+          fill="none" stroke="url(#rootLight)" stroke-width="1.2" stroke-linecap="round"/>
+    <path class="root-line" d="M 22,160 C 30,175 34,185 30,195 M 22,310 C 32,325 32,338 28,348" 
+          fill="none" stroke="url(#rootGold)" stroke-width="1.2" stroke-linecap="round"/>
+
+    <!-- ================= RIGHT ROOTS ================= -->
+    <!-- Primary heavy root along right border (x around 380) -->
+    <path class="root-line" d="M 380,15 C 386,70 374,140 382,210 C 388,280 375,350 383,420 C 378,465 382,495 380,505" 
+          fill="none" stroke="url(#rootGold)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Secondary entwining root -->
+    <path class="root-line" d="M 376,5 C 372,60 386,130 378,200 C 372,270 385,340 377,410 C 384,460 375,495 380,515" 
+          fill="none" stroke="url(#rootLight)" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- Right tendrils -->
+    <path class="root-line" d="M 382,90 C 392,105 394,118 388,128 M 384,240 C 394,255 395,268 390,278 M 381,370 C 392,385 392,398 386,408" 
+          fill="none" stroke="url(#rootLight)" stroke-width="1.2" stroke-linecap="round"/>
+    <path class="root-line" d="M 378,160 C 370,175 366,185 370,195 M 378,310 C 368,325 368,338 372,348" 
+          fill="none" stroke="url(#rootGold)" stroke-width="1.2" stroke-linecap="round"/>
+
+    <!-- ================= CORNER GNARLS & CLUSTERS ================= -->
+    <!-- Top-Left Corner Root Knots -->
+    <path class="root-line" d="M 12,35 C 2,20 18,6 35,12 C 45,18 30,30 20,20" fill="none" stroke="url(#rootGold)" stroke-width="2.2"/>
+    <!-- Top-Right Corner Root Knots -->
+    <path class="root-line" d="M 365,12 C 382,6 398,20 388,35 C 378,45 370,30 380,20" fill="none" stroke="url(#rootGold)" stroke-width="2.2"/>
+    <!-- Bottom-Left Corner Root Knots -->
+    <path class="root-line" d="M 12,485 C 2,500 18,514 35,508 C 45,502 30,490 20,500" fill="none" stroke="url(#rootGold)" stroke-width="2.2"/>
+    <!-- Bottom-Right Corner Root Knots -->
+    <path class="root-line" d="M 365,508 C 382,514 398,500 388,485 C 378,475 370,490 380,500" fill="none" stroke="url(#rootGold)" stroke-width="2.2"/>
+  </g>
+</svg>

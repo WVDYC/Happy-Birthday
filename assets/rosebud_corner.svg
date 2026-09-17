@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <linearGradient id="goldStem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0aa"/>
+      <stop offset="40%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#8a6b18"/>
+    </linearGradient>
+    <linearGradient id="goldPetal1" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#fff5cc"/>
+      <stop offset="35%" stop-color="#eac76b"/>
+      <stop offset="75%" stop-color="#b88f28"/>
+      <stop offset="100%" stop-color="#6e4f0c"/>
+    </linearGradient>
+    <linearGradient id="goldPetal2" x1="80%" y1="0%" x2="20%" y2="100%">
+      <stop offset="0%" stop-color="#fff8db"/>
+      <stop offset="45%" stop-color="#dfb853"/>
+      <stop offset="85%" stop-color="#a47b19"/>
+      <stop offset="100%" stop-color="#5a3d04"/>
+    </linearGradient>
+    <linearGradient id="goldLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8cf78"/>
+      <stop offset="50%" stop-color="#a88523"/>
+      <stop offset="100%" stop-color="#4e3b08"/>
+    </linearGradient>
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#d4af37" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Corner hugging stems -->
+  <!-- Top horizontal vine hugging frame border -->
+  <path d="M 0,22 C 35,20 70,16 110,18 C 128,19 145,23 160,25" fill="none" stroke="url(#goldStem)" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Left vertical vine hugging frame border -->
+  <path d="M 22,0 C 20,35 16,70 18,110 C 19,128 23,145 25,160" fill="none" stroke="url(#goldStem)" stroke-width="2.2" stroke-linecap="round"/>
+
+  <!-- Tendrils & Thorns -->
+  <path d="M 125,19 C 135,12 142,6 148,8 C 154,10 152,18 144,18 C 138,18 136,12 142,10" fill="none" stroke="url(#goldStem)" stroke-width="1.2"/>
+  <path d="M 19,125 C 12,135 6,142 8,148 C 10,154 18,152 18,144 C 18,138 12,136 10,142" fill="none" stroke="url(#goldStem)" stroke-width="1.2"/>
+  <!-- Thorns on stems -->
+  <path d="M 65,19 C 68,14 72,12 75,13 C 74,16 71,18 69,19 Z" fill="url(#goldStem)"/>
+  <path d="M 19,65 C 14,68 12,72 13,75 C 16,74 18,71 19,69 Z" fill="url(#goldStem)"/>
+  <path d="M 140,23 C 143,26 145,30 144,32 C 142,30 139,27 138,24 Z" fill="url(#goldStem)"/>
+  <path d="M 23,140 C 26,143 30,145 32,144 C 30,142 27,139 24,138 Z" fill="url(#goldStem)"/>
+
+  <!-- Botanical Leaves along stems -->
+  <!-- Leaf 1 along top -->
+  <path d="M 85,17 C 95,7 110,4 122,8 C 118,18 106,24 95,22 C 90,21 86,18 85,17 Z" fill="url(#goldLeaf)" stroke="#fff0aa" stroke-width="0.5"/>
+  <path d="M 88,18 Q 104,12 118,9" fill="none" stroke="#ffe082" stroke-width="0.7"/>
+  <path d="M 98,15 Q 104,18 108,20 M 104,13 Q 110,15 114,16" fill="none" stroke="#ffe082" stroke-width="0.5" opacity="0.8"/>
+
+  <!-- Leaf 2 along left -->
+  <path d="M 17,85 C 7,95 4,110 8,122 C 18,118 24,106 22,95 C 21,90 18,86 17,85 Z" fill="url(#goldLeaf)" stroke="#fff0aa" stroke-width="0.5"/>
+  <path d="M 18,88 Q 12,104 9,118" fill="none" stroke="#ffe082" stroke-width="0.7"/>
+  <path d="M 15,98 Q 18,104 20,108 M 13,104 Q 15,110 16,114" fill="none" stroke="#ffe082" stroke-width="0.5" opacity="0.8"/>
+
+  <!-- Small leaf pair near corner -->
+  <path d="M 38,22 C 45,15 54,16 60,22 C 54,27 46,26 38,22 Z" fill="url(#goldLeaf)" stroke="#fff0aa" stroke-width="0.4"/>
+  <path d="M 22,38 C 15,45 16,54 22,60 C 27,54 26,46 22,38 Z" fill="url(#goldLeaf)" stroke="#fff0aa" stroke-width="0.4"/>
+
+  <!-- Stem branching toward main central Rosebud -->
+  <path d="M 22,22 C 32,28 38,36 44,46" fill="none" stroke="url(#goldStem)" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Smaller secondary delicate bud on top right -->
+  <g transform="translate(48, 14) rotate(25) scale(0.65)">
+    <path d="M 0,20 C 2,12 8,6 14,0 C 18,8 16,18 10,24 Z" fill="url(#goldPetal1)" stroke="#ffe082" stroke-width="0.6"/>
+    <path d="M 4,20 C 8,14 14,8 18,2 C 22,10 18,20 12,25 Z" fill="url(#goldPetal2)" stroke="#ffd54f" stroke-width="0.6"/>
+    <path d="M -2,22 C 2,16 6,10 10,4 C 6,16 4,22 -2,22 Z" fill="#6e4f0c" opacity="0.6"/>
+    <!-- Sepals -->
+    <path d="M -2,20 C 2,12 4,6 2,0 C 6,8 6,16 4,24 Z" fill="url(#goldLeaf)" stroke="#fff0aa" stroke-width="0.5"/>
+    <path d="M 8,24 C 12,18 16,12 22,8 C 18,16 16,22 10,26 Z" fill="url(#goldLeaf)" stroke="#fff0aa" stroke-width="0.5"/>
+    <path d="M 2,24 C 0,30 2,36 4,40" fill="none" stroke="url(#goldStem)" stroke-width="2"/>
+  </g>
+
+  <!-- ================= MAIN ROSEBUD (Botanical Luxury) ================= -->
+  <!-- Positioned at the corner (center roughly 58, 58), tilted diagonally 45deg -->
+  <g transform="translate(56, 56) rotate(-45)" filter="url(#goldGlow)">
+    <!-- Swollen Receptacle (base of bud) -->
+    <ellipse cx="0" cy="38" rx="8" ry="6" fill="url(#goldLeaf)" stroke="#ffe082" stroke-width="0.6"/>
+    <path d="M 0,42 C 0,48 -4,56 -10,64" fill="none" stroke="url(#goldStem)" stroke-width="2.8" stroke-linecap="round"/>
+
+    <!-- Calyx & Sepals (Long pointed leaves clasping the bud) -->
+    <!-- Left sepal curving out -->
+    <path d="M -5,38 C -14,32 -22,22 -26,10 C -20,18 -12,28 -3,36 Z" fill="url(#goldLeaf)" stroke="#fff8db" stroke-width="0.6"/>
+    <!-- Right sepal curving out -->
+    <path d="M 5,38 C 14,32 22,22 26,10 C 20,18 12,28 3,36 Z" fill="url(#goldLeaf)" stroke="#fff8db" stroke-width="0.6"/>
+    <!-- Center sepal -->
+    <path d="M -2,38 C -4,26 -2,12 0,0 C 2,12 4,26 2,38 Z" fill="url(#goldLeaf)" stroke="#fff8db" stroke-width="0.6" opacity="0.9"/>
+
+    <!-- Rosebud Petals Layering -->
+    <!-- Outer Left Enfolding Petal -->
+    <path d="M -6,35 C -18,28 -22,10 -16,-6 C -10,-18 2,-26 12,-30 C 6,-20 0,-10 -2,6 C -4,20 -2,28 -6,35 Z"
+          fill="url(#goldPetal1)" stroke="#ffe082" stroke-width="0.7"/>
+    <!-- Outer Left Petal Rim highlight -->
+    <path d="M 12,-30 C 2,-26 -10,-18 -16,-6 C -22,10 -18,28 -6,35"
+          fill="none" stroke="#fff8db" stroke-width="1" stroke-linecap="round"/>
+
+    <!-- Outer Right Enfolding Petal (overlaps left petal) -->
+    <path d="M 6,35 C 18,28 22,10 16,-6 C 10,-18 -2,-26 -12,-30 C -4,-22 4,-12 4,6 C 4,20 2,28 6,35 Z"
+          fill="url(#goldPetal2)" stroke="#ffd54f" stroke-width="0.7"/>
+    <!-- Outer Right Petal Rim highlight -->
+    <path d="M -12,-30 C -2,-26 10,-18 16,-6 C 22,10 18,28 6,35"
+          fill="none" stroke="#fff8db" stroke-width="1" stroke-linecap="round"/>
+
+    <!-- Middle Overlapping Petal (Front Center) -->
+    <path d="M -9,30 C -12,18 -10,0 0,-18 C 10,0 12,18 9,30 C 5,34 -5,34 -9,30 Z"
+          fill="url(#goldPetal1)" stroke="#ffe082" stroke-width="0.6"/>
+
+    <!-- Inner Curled Velvety Cone / Bud Spiral Core -->
+    <path d="M -6,-10 C -10,-18 -4,-26 2,-28 C 8,-30 14,-22 10,-14 C 6,-6 -2,-4 -6,-10 Z"
+          fill="url(#goldPetal2)" stroke="#ffe082" stroke-width="0.6"/>
+    <!-- Delicate swirl lines showing tight petal wraps inside -->
+    <path d="M -2,-22 C 2,-26 7,-24 8,-20 C 9,-16 4,-12 0,-14 C -3,-15 -2,-19 1,-20"
+          fill="none" stroke="#5a3d04" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M -2,-22 C 2,-26 7,-24 8,-20 C 9,-16 4,-12 0,-14 C -3,-15 -2,-19 1,-20"
+          fill="none" stroke="#fff5cc" stroke-width="0.6" stroke-linecap="round"/>
+
+    <!-- Delicate front petal lip curl -->
+    <path d="M -8,12 C -4,6 4,6 8,12 C 4,16 -4,16 -8,12 Z"
+          fill="url(#goldPetal2)" stroke="#fff8db" stroke-width="0.5"/>
+  </g>
+</svg>

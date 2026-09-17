@@ -9,78 +9,89 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="theme-white">
 
-    <!-- Global Effect Container for Gold Sparkles -->
+    <!-- Global Background Pearl Atmosphere -->
+    <div class="bg-atmosphere"></div>
+
+    <!-- Global Ambient Gold Floating Dust -->
     <div class="effect-container" id="effects"></div>
 
-    <!-- Cover Screen -->
+    <!-- Floating Luxury Music Control (Top Right) -->
+    <button id="musicToggle" class="music-toggle-btn" aria-label="Музыканы қосу/өшіру">
+        <span class="music-icon">🎵</span>
+        <div class="music-waves">
+            <span></span><span></span><span></span>
+        </div>
+    </button>
+
+    <!-- Cover Screen (The Opening Envelope / Frame) -->
     <div id="cover" class="cover-screen">
-        <div class="cover-frame">
+
+        <div class="cover-frame" id="coverFrame">
             
-            <!-- Code-based Roses with Roots (Top Left) -->
-            <svg class="vine-roots top-left" viewBox="-50 -50 150 150" xmlns="http://www.w3.org/2000/svg">
-                <!-- Roots / Vines twisting around the frame corner -->
-                <path class="root" d="M -50,-20 Q 20,-20 20,50 T 20,150" fill="none" stroke="#d4af37" stroke-width="2"/>
-                <path class="root" d="M -20,-50 Q -20,20 50,20 T 150,20" fill="none" stroke="#d4af37" stroke-width="2"/>
-                <path class="root" d="M 0,0 C 40,0 0,40 40,40 C 60,40 40,80 80,80" fill="none" stroke="#d4af37" stroke-width="1.5"/>
-                
-                <!-- Leaves -->
-                <path class="leaf" d="M 20,50 C 35,45 40,55 30,60 C 15,65 10,55 20,50 Z" fill="#050505" stroke="#d4af37"/>
-                <path class="leaf" d="M 50,20 C 45,35 55,40 60,30 C 65,15 55,10 50,20 Z" fill="#050505" stroke="#d4af37"/>
-                
-                <!-- Heraldic Rose -->
-                <g class="rose-blossom" transform="translate(10, 10)">
-                    <path d="M0 -30 C20 -30 30 -10 20 10 C30 10 30 30 10 30 C10 40 -10 40 -10 30 C-30 30 -30 10 -20 10 C-30 -10 -20 -30 0 -30 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
-                    <path d="M0 -20 C15 -20 20 -5 10 5 C20 10 15 25 0 20 C-15 25 -20 10 -10 5 C-20 -5 -15 -20 0 -20 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
-                    <path d="M0 -10 C5 -10 10 0 5 5 C10 10 0 15 -5 5 C-10 0 -5 -10 0 -10 Z" fill="#222" stroke="#d4af37" stroke-width="1"/>
-                    <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-                </g>
-                <g class="rose-blossom" transform="translate(50, 60) scale(0.6) rotate(45)">
-                    <path d="M0 -30 C20 -30 30 -10 20 10 C30 10 30 30 10 30 C10 40 -10 40 -10 30 C-30 30 -30 10 -20 10 C-30 -10 -20 -30 0 -30 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
-                    <path d="M0 -20 C15 -20 20 -5 10 5 C20 10 15 25 0 20 C-15 25 -20 10 -10 5 C-20 -5 -15 -20 0 -20 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
-                    <path d="M0 -10 C5 -10 10 0 5 5 C10 10 0 15 -5 5 C-10 0 -5 -10 0 -10 Z" fill="#222" stroke="#d4af37" stroke-width="1"/>
-                    <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-                </g>
-            </svg>
+            <!-- Twisting Golden Roots Entwining the Frame Borders -->
+            <img src="assets/roots_frame.svg" class="roots-overlay" alt="Тамырлар">
 
-            <!-- Code-based Roses with Roots (Bottom Right) -->
-            <svg class="vine-roots bottom-right" viewBox="-50 -50 150 150" xmlns="http://www.w3.org/2000/svg">
-                <!-- Roots / Vines twisting around the frame corner -->
-                <path class="root" d="M 150,120 Q 80,120 80,50 T 80,-50" fill="none" stroke="#d4af37" stroke-width="2"/>
-                <path class="root" d="M 120,150 Q 120,80 50,80 T -50,80" fill="none" stroke="#d4af37" stroke-width="2"/>
-                <path class="root" d="M 100,100 C 60,100 100,60 60,60 C 40,60 60,20 20,20" fill="none" stroke="#d4af37" stroke-width="1.5"/>
-                
-                <!-- Leaves -->
-                <path class="leaf" d="M 80,50 C 65,55 60,45 70,40 C 85,35 90,45 80,50 Z" fill="#050505" stroke="#d4af37"/>
-                <path class="leaf" d="M 50,80 C 55,65 45,60 40,70 C 35,85 45,90 50,80 Z" fill="#050505" stroke="#d4af37"/>
+            <!-- 12 Delicate Spiral Pink Roses (from User Reference) Wrapping the Frame -->
+            <!-- 4 Main Corner Roses -->
+            <div class="rose-item corner-rose tl-main">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
+            <div class="rose-item corner-rose tr-main">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
+            <div class="rose-item corner-rose br-main">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
+            <div class="rose-item corner-rose bl-main">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
 
-                <!-- Heraldic Rose -->
-                <g class="rose-blossom" transform="translate(90, 90)">
-                    <path d="M0 -30 C20 -30 30 -10 20 10 C30 10 30 30 10 30 C10 40 -10 40 -10 30 C-30 30 -30 10 -20 10 C-30 -10 -20 -30 0 -30 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
-                    <path d="M0 -20 C15 -20 20 -5 10 5 C20 10 15 25 0 20 C-15 25 -20 10 -10 5 C-20 -5 -15 -20 0 -20 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
-                    <path d="M0 -10 C5 -10 10 0 5 5 C10 10 0 15 -5 5 C-10 0 -5 -10 0 -10 Z" fill="#222" stroke="#d4af37" stroke-width="1"/>
-                    <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-                </g>
-                <g class="rose-blossom" transform="translate(50, 40) scale(0.6) rotate(-45)">
-                    <path d="M0 -30 C20 -30 30 -10 20 10 C30 10 30 30 10 30 C10 40 -10 40 -10 30 C-30 30 -30 10 -20 10 C-30 -10 -20 -30 0 -30 Z" fill="#050505" stroke="#d4af37" stroke-width="2"/>
-                    <path d="M0 -20 C15 -20 20 -5 10 5 C20 10 15 25 0 20 C-15 25 -20 10 -10 5 C-20 -5 -15 -20 0 -20 Z" fill="#111" stroke="#d4af37" stroke-width="1.5"/>
-                    <path d="M0 -10 C5 -10 10 0 5 5 C10 10 0 15 -5 5 C-10 0 -5 -10 0 -10 Z" fill="#222" stroke="#d4af37" stroke-width="1"/>
-                    <circle cx="0" cy="0" r="3" fill="#d4af37"/>
-                </g>
-            </svg>
+            <!-- 4 Inner Cluster Roses creating lush bouquets at the corners -->
+            <div class="rose-item cluster-rose tl-cluster">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
+            <div class="rose-item cluster-rose tr-cluster">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
+            <div class="rose-item cluster-rose br-cluster">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
+            <div class="rose-item cluster-rose bl-cluster">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
+
+            <!-- 4 Edge Accent Roses along each side of the frame -->
+            <div class="rose-item edge-rose top-mid">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
+            <div class="rose-item edge-rose right-mid">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
+            <div class="rose-item edge-rose bottom-mid">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
+            <div class="rose-item edge-rose left-mid">
+                <img src="assets/user_rose_512.png" class="rose-flower" alt="Қызғылт раушан">
+            </div>
 
             <div class="cover-text-wrapper">
+                <div class="cover-emblem">❦ 70 ЖАС ❦</div>
                 <h1 class="cover-title">Шақыру билеті</h1>
-                <p class="cover-subtitle">Зейнеп Аменованың<br>70 жасқа толған мерейтойы</p>
-                <button id="openBtn" class="open-btn">Ашу</button>
+                <div class="cover-divider"></div>
+                <p class="cover-subtitle">Зейнеп Аменованың<br>мерейтойлық ақ дастарханы</p>
+                <button id="openBtn" class="open-btn" aria-label="Шақыруды ашу">
+                    <span class="btn-text">Ашу</span>
+                    <span class="btn-shine"></span>
+                </button>
             </div>
         </div>
     </div>
 
     <!-- Main Invitation -->
     <div id="invitation" class="invitation-container">
-        <div class="invitation-card">
+        <div class="invitation-card" id="invitationCard">
             
             <div class="age-accent">70</div>
             
@@ -108,7 +119,7 @@
                 <div class="detail-item detail-3">
                     <h3>Мекен-жайы</h3>
                     <p>Астана қаласы<br>«Томирис» мейрамханасы</p>
-                    <a href="https://2gis.kz/astana/geo/70000001047392718/71.510061,51.140464" target="_blank" class="map-btn">Картадан көру</a>
+                    <a href="https://2gis.kz/astana/geo/70000001047392718/71.510061,51.140464" target="_blank" rel="noopener noreferrer" class="map-btn">Картадан көру</a>
                 </div>
                 
                 <!-- Countdown Timer -->
@@ -141,10 +152,10 @@
         </div>
     </div>
 
-    <!-- Hidden YouTube Audio Player -->
+    <!-- Hidden YouTube Audio Player (Direct Mobile-Optimized Embed with playsinline) -->
     <div id="player-container">
         <iframe id="youtubePlayer" 
-                src="https://www.youtube.com/embed?listType=search&list=Туған+күніңмен+лирическая+версия+ән&enablejsapi=1&loop=1" 
+                src="https://www.youtube.com/embed/kYQkHjRk54E?enablejsapi=1&autoplay=0&playsinline=1&loop=1&playlist=kYQkHjRk54E&controls=0&modestbranding=1" 
                 frameborder="0" 
                 allow="autoplay; encrypted-media" 
                 allowfullscreen>

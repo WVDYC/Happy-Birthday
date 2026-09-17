@@ -2,25 +2,142 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
     width: 100%;
     height: 100%;
-    overflow: hidden; /* CRITICAL FIX: prevents the broken mobile scroll */
+    overflow: hidden;
     position: relative;
+    background-color: #fcfbf8;
 }
 
 body {
-    font-family: 'Cormorant Garamond', serif;
-    background: #050505;
-    color: #e8d0a9;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: #2b241c;
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
-/* Base Cover */
+/* Luxury white & pearl background radial atmosphere */
+.bg-atmosphere {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% 35%, #ffffff 0%, #faf5ec 55%, #ede2d0 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Ambient Gold Floating Dust */
+.effect-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.sparkle {
+    position: absolute;
+    bottom: -10px;
+    background: radial-gradient(circle, #fff7c2 10%, #d4af37 60%, transparent 80%);
+    border-radius: 50%;
+    box-shadow: 0 0 6px 1px rgba(212, 175, 55, 0.45);
+    animation: floatUp linear forwards;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+@keyframes floatUp {
+    0% { transform: translate3d(0, 0, 0) scale(0.4); opacity: 0; }
+    15% { opacity: 0.85; }
+    85% { opacity: 0.85; }
+    100% { transform: translate3d(0, -110vh, 0) scale(1.4); opacity: 0; }
+}
+
+/* ==========================================================================
+   FLOATING LUXURY MUSIC CONTROLLER
+   ========================================================================== */
+.music-toggle-btn {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid #d4af37;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(180, 140, 50, 0.25), 0 0 10px rgba(212, 175, 55, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.music-toggle-btn:hover, .music-toggle-btn:active {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.music-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+    transition: transform 0.5s ease;
+}
+
+.music-toggle-btn.playing .music-icon {
+    animation: noteSpin 4s linear infinite;
+}
+
+@keyframes noteSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.music-waves {
+    position: absolute;
+    bottom: 5px;
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    height: 8px;
+}
+
+.music-waves span {
+    width: 2px;
+    height: 3px;
+    background: #c99f32;
+    border-radius: 1px;
+    transition: height 0.2s ease;
+}
+
+.music-toggle-btn.playing .music-waves span:nth-child(1) {
+    animation: waveBounce 0.8s infinite alternate ease-in-out;
+}
+.music-toggle-btn.playing .music-waves span:nth-child(2) {
+    animation: waveBounce 0.8s 0.25s infinite alternate ease-in-out;
+}
+.music-toggle-btn.playing .music-waves span:nth-child(3) {
+    animation: waveBounce 0.8s 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes waveBounce {
+    0% { height: 2px; }
+    100% { height: 8px; }
+}
+
+/* ==========================================================================
+   COVER SCREEN & LUXURY WHITE/GOLD FRAME
+   ========================================================================== */
 .cover-screen {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -28,123 +145,389 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 100;
+    overflow: hidden;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                filter 0.8s ease;
 }
 
-/* THE SQUARE FRAME */
-.cover-frame {
-    position: relative;
-    border: 2px solid #d4af37;
-    padding: 4rem 2rem;
-    width: 90%;
-    max-width: 360px;
-    background: transparent;
-    text-align: center;
-    z-index: 2;
-    transition: transform 1s ease, opacity 0.5s ease;
-}
-
-/* SVG Roses & Roots wrapping the frame */
-.vine-roots {
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    z-index: 3;
+.cover-screen.dissolving {
+    opacity: 0;
+    transform: scale(1.06);
+    filter: blur(8px);
     pointer-events: none;
 }
 
-.top-left {
-    top: -40px; left: -40px;
+/* The Central Decorative Frame */
+.cover-frame {
+    position: relative;
+    border: 2px solid #c99f32;
+    padding: 3.8rem 2.2rem;
+    width: 88%;
+    max-width: 370px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 4px;
+    box-shadow: 0 15px 50px rgba(180, 145, 95, 0.25),
+                inset 0 0 25px rgba(212, 175, 55, 0.08),
+                0 0 25px rgba(212, 175, 55, 0.2);
+    z-index: 10;
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
 
-.bottom-right {
-    bottom: -40px; right: -40px;
+/* Concentric luxury inset border lines */
+.cover-frame::before {
+    content: '';
+    position: absolute;
+    top: 6px; left: 6px; right: 6px; bottom: 6px;
+    border: 1px solid rgba(201, 159, 50, 0.4);
+    border-radius: 2px;
+    pointer-events: none;
 }
 
-/* Animate the roots/vines drawing themselves */
-.root {
-    stroke-dasharray: 500;
-    stroke-dashoffset: 500;
-    animation: drawRoot 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.cover-frame::after {
+    content: '';
+    position: absolute;
+    top: -6px; left: -6px; right: -6px; bottom: -6px;
+    border: 1px solid rgba(201, 159, 50, 0.25);
+    border-radius: 6px;
+    pointer-events: none;
 }
 
-@keyframes drawRoot {
-    to { stroke-dashoffset: 0; }
-}
-
-/* Animate the leaves and petals blooming */
-.rose-blossom, .leaf {
+/* ==========================================================================
+   TWISTING GOLDEN ROOTS WRAPPING THE ENTIRE FRAME
+   ========================================================================== */
+.roots-overlay {
+    position: absolute;
+    top: -14px;
+    left: -14px;
+    width: calc(100% + 28px);
+    height: calc(100% + 28px);
+    pointer-events: none;
+    z-index: 15;
     opacity: 0;
-    transform: scale(0);
-    transform-origin: center;
-    animation: popOut 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    animation-delay: 1.5s;
+    transform: scale(0.97);
+    filter: drop-shadow(0 2px 5px rgba(140, 105, 30, 0.35));
+    animation: rootsGrow 1.4s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes popOut {
-    to { opacity: 1; transform: scale(1); }
+@keyframes rootsGrow {
+    0% {
+        opacity: 0;
+        transform: scale(0.96);
+        filter: drop-shadow(0 0 15px #ffd700);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: drop-shadow(0 2px 6px rgba(140, 105, 30, 0.35));
+    }
 }
 
-/* Closing animations for cover */
-.cover-frame.closing {
-    transform: scale(0.5);
+/* ==========================================================================
+   OPULENT GARLAND OF 12 PINK SPIRAL ROSES (BRIGHT & LUMINOUS)
+   ========================================================================== */
+.rose-item {
+    position: absolute;
+    pointer-events: none;
+    z-index: 25;
+}
+
+.rose-flower {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+    /* Bright luminous rose with zero halo and warm glowing aura */
+    filter: brightness(1.14) saturate(1.1) drop-shadow(0 4px 14px rgba(255, 175, 185, 0.45)) drop-shadow(0 0 12px rgba(255, 225, 140, 0.55));
+    transform-origin: center center;
     opacity: 0;
+    transform: scale(0) rotate(-360deg);
+    animation: roseUnwind 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity, filter;
+}
+
+/* Unwinding / Unspinning Bloom Keyframe */
+@keyframes roseUnwind {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-360deg);
+        filter: brightness(2.2) drop-shadow(0 0 25px #ffd700);
+    }
+    65% {
+        opacity: 1;
+        transform: scale(1.14) rotate(15deg);
+        filter: brightness(1.22) drop-shadow(0 0 16px rgba(255, 215, 120, 0.7));
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1.14) saturate(1.1) drop-shadow(0 4px 14px rgba(255, 175, 185, 0.45)) drop-shadow(0 0 12px rgba(255, 225, 140, 0.55));
+    }
+}
+
+/* 4 Main Corner Roses */
+.corner-rose {
+    width: 74px;
+    height: 74px;
+}
+.tl-main { top: -37px; left: -37px; }
+.tr-main { top: -37px; right: -37px; }
+.br-main { bottom: -37px; right: -37px; }
+.bl-main { bottom: -37px; left: -37px; }
+
+.tl-main .rose-flower { animation-delay: 0.1s; }
+.tr-main .rose-flower { animation-delay: 0.5s; }
+.br-main .rose-flower { animation-delay: 0.7s; }
+.bl-main .rose-flower { animation-delay: 1.1s; }
+
+/* 4 Inner Cluster Roses */
+.cluster-rose {
+    width: 54px;
+    height: 54px;
+}
+.tl-cluster { top: -22px; left: 28px; }
+.tr-cluster { top: 28px; right: -22px; }
+.br-cluster { bottom: -22px; right: 28px; }
+.bl-cluster { bottom: 28px; left: -22px; }
+
+.tl-cluster .rose-flower { animation-delay: 0.25s; }
+.tr-cluster .rose-flower { animation-delay: 0.4s; }
+.br-cluster .rose-flower { animation-delay: 0.85s; }
+.bl-cluster .rose-flower { animation-delay: 1.0s; }
+
+/* 4 Edge Accent Roses along borders */
+.edge-rose {
+    width: 50px;
+    height: 50px;
+}
+.top-mid { top: -25px; left: 50%; margin-left: -25px; }
+.right-mid { top: 50%; right: -25px; margin-top: -25px; }
+.bottom-mid { bottom: -25px; left: 50%; margin-left: -25px; }
+.left-mid { top: 50%; left: -25px; margin-top: -25px; }
+
+.top-mid .rose-flower { animation-delay: 0.3s; }
+.right-mid .rose-flower { animation-delay: 0.6s; }
+.bottom-mid .rose-flower { animation-delay: 0.9s; }
+.left-mid .rose-flower { animation-delay: 1.2s; }
+
+/* Rose Burst into Butterflies Animation */
+.rose-flower.rose-burst {
+    animation: roseBurst 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+@keyframes roseBurst {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    45% {
+        transform: scale(1.25) rotate(160deg);
+        filter: brightness(2.6) drop-shadow(0 0 35px #ffd700);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(480deg);
+        filter: brightness(3.5) drop-shadow(0 0 45px #fff);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   COVER TYPOGRAPHY & BUTTON (WHITE/GOLD LUXURY)
+   ========================================================================== */
+.cover-emblem {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: #9e7924;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
 .cover-title {
-    font-size: 2.8rem;
-    margin-bottom: 0.5rem;
-    color: #d4af37;
+    font-size: 2.9rem;
+    line-height: 1.1;
+    margin-bottom: 0.6rem;
+    color: #231c15;
     font-weight: 600;
-    text-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
-    position: relative;
-    z-index: 5;
+    text-shadow: 0 2px 20px rgba(212, 175, 55, 0.25);
+    letter-spacing: 1px;
+}
+
+.cover-divider {
+    width: 60px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #c99f32, transparent);
+    margin: 0.6rem auto 1rem;
 }
 
 .cover-subtitle {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.85rem;
-    margin-bottom: 2.5rem;
-    letter-spacing: 2px;
+    line-height: 1.6;
+    margin-bottom: 2.4rem;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: #a38959;
-    position: relative;
-    z-index: 5;
+    color: #5e4d35;
+    font-weight: 400;
 }
 
+/* Luxury Interactive Button */
 .open-btn {
-    font-family: 'Montserrat', sans-serif;
-    background: #050505;
-    color: #d4af37;
-    border: 1px solid #d4af37;
-    padding: 12px 35px;
-    font-size: 0.9rem;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    letter-spacing: 2px;
-    text-transform: uppercase;
     position: relative;
-    z-index: 5;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #d4af37 0%, #b88d22 100%);
+    color: #ffffff;
+    border: 1.5px solid #fff0a0;
+    padding: 13px 44px;
+    font-size: 0.92rem;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    box-shadow: 0 5px 20px rgba(180, 140, 50, 0.45), 0 0 15px rgba(212, 175, 55, 0.3);
+    z-index: 30;
 }
 
-.open-btn:hover {
-    background: #d4af37;
-    color: #050505;
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+.open-btn:hover, .open-btn:active {
+    background: linear-gradient(135deg, #e5be49 0%, #c99b28 100%);
+    box-shadow: 0 0 35px rgba(235, 195, 80, 0.85);
+    transform: translateY(-2px) scale(1.03);
 }
 
-/* Invitation Container */
+.btn-shine {
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+    transform: skewX(-25deg);
+    animation: btnShineAnim 3.5s infinite ease-in-out;
+}
+
+@keyframes btnShineAnim {
+    0%, 70% { left: -100%; }
+    100% { left: 200%; }
+}
+
+/* ==========================================================================
+   CINEMATIC SILKY BUTTERFLY VORTEX & FLIGHT
+   ========================================================================== */
+.butterfly-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 10000;
+    overflow: hidden;
+}
+
+/* Golden Light Veil */
+.golden-veil {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 50% 50%, rgba(212, 175, 55, 0.28) 0%, rgba(255, 215, 0, 0.12) 40%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.6);
+    pointer-events: none;
+    animation: veilSweep 1.8s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+}
+
+@keyframes veilSweep {
+    0% { opacity: 0; transform: scale(0.5); }
+    35% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* Layer 1: Global flight glide (translate3d) */
+.magic-butterfly {
+    position: absolute;
+    will-change: transform, opacity;
+    pointer-events: none;
+    filter: drop-shadow(0 3px 10px rgba(212, 160, 40, 0.85));
+    transform-origin: center center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Layer 2: Organic aerodynamic sway (drifts naturally on air currents) */
+.butterfly-sway {
+    width: 100%;
+    height: 100%;
+    transform-origin: center center;
+    animation: naturalSway 2.2s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+@keyframes naturalSway {
+    0% {
+        transform: translateX(-14px) rotate(-6deg);
+    }
+    100% {
+        transform: translateX(14px) rotate(6deg);
+    }
+}
+
+/* Layer 3: Gentle, languid wing flapping (0.34s smooth rhythm) */
+.butterfly-inner {
+    width: 100%;
+    height: 100%;
+    transform-origin: center center;
+    animation: butterflyFlap 0.34s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+.magic-butterfly img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Silky smooth wing stroke without harsh skewing */
+@keyframes butterflyFlap {
+    0% {
+        transform: scaleX(1);
+    }
+    100% {
+        transform: scaleX(0.22);
+    }
+}
+
+/* Golden Fairy Dust trail particles */
+.gold-dust {
+    position: absolute;
+    background: radial-gradient(circle, #ffffff 15%, #ffd700 55%, transparent 80%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.85);
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   MAIN INVITATION CARD (WHITE LUXURY THEME)
+   ========================================================================== */
 .invitation-container {
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
     position: absolute;
     top: 0; left: 0;
     display: none;
     justify-content: center;
     align-items: flex-start;
-    padding: 3rem 1rem;
+    padding: 3rem 1rem 4rem;
     opacity: 0;
+    z-index: 10;
+    -webkit-overflow-scrolling: touch;
 }
 
 .invitation-container.visible {
@@ -153,246 +536,299 @@ body {
 }
 
 .invitation-card {
-    background: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    max-width: 550px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    max-width: 540px;
     width: 100%;
-    padding: 3rem 2rem;
-    border-radius: 4px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(212, 175, 55, 0.2);
+    padding: 3.5rem 2.2rem;
+    border-radius: 6px;
+    border: 1.5px solid rgba(201, 159, 50, 0.45);
+    box-shadow: 0 20px 60px rgba(160, 130, 80, 0.22),
+                0 0 35px rgba(212, 175, 55, 0.12),
+                inset 0 0 20px rgba(212, 175, 55, 0.05);
     text-align: center;
     position: relative;
-    z-index: 10;
     margin: auto;
+    color: #2b241c;
+    transform: translate3d(0, 40px, 0) scale(0.97);
+    opacity: 0;
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.9s ease;
 }
 
-/* Typography */
+.invitation-card.revealed {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+}
+
+/* Card Typography */
 .age-accent {
-    font-size: 4rem;
+    font-size: 4.4rem;
     font-weight: 700;
     line-height: 1;
-    color: #d4af37;
-    margin-bottom: 0.5rem;
+    color: #c99f32;
+    margin-bottom: 0.4rem;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
+    text-shadow: 0 4px 18px rgba(201, 159, 50, 0.3);
 }
 
 .header h2 {
-    font-size: 1.3rem;
-    color: #e8d0a9;
+    font-size: 1.35rem;
+    color: #3b3024;
     margin-bottom: 1.5rem;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: 500;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
 }
 
 .divider {
     width: 0;
-    height: 1px;
-    background: #d4af37;
-    margin: 0 auto 2.5rem;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #c99f32, transparent);
+    margin: 0 auto 2.4rem;
     opacity: 0;
 }
 
 .main-text p {
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    color: #c9b79b;
+    line-height: 1.65;
+    margin-bottom: 1.1rem;
+    color: #4a3e30;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
 }
 
 .name {
-    font-size: 3rem;
-    color: #d4af37;
-    margin: 1rem 0;
+    font-size: 3.2rem;
+    color: #8c2236; /* Royal Jubilee Burgundy */
+    margin: 1.2rem 0;
     font-style: italic;
     font-weight: 600;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
+    text-shadow: 0 2px 10px rgba(140, 34, 54, 0.2);
 }
 
 .details {
-    margin-top: 2.5rem;
+    margin-top: 2.4rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    border-top: 1px solid rgba(201, 159, 50, 0.3);
 }
 
 .detail-item {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.6rem;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
 }
 
 .detail-item h3 {
-    font-size: 1.1rem;
-    color: #d4af37;
-    margin-bottom: 0.2rem;
+    font-size: 1.15rem;
+    color: #9e7924;
+    margin-bottom: 0.3rem;
     font-style: italic;
+    letter-spacing: 1px;
 }
 
 .detail-item p {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.95rem;
-    font-weight: 400;
-    color: #e8d0a9;
+    font-weight: 500;
+    color: #2b241c;
 }
 
 .map-btn {
     display: inline-block;
     margin-top: 1rem;
-    padding: 8px 20px;
-    color: #050505;
-    background: #d4af37;
+    padding: 9px 24px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #d4af37 0%, #b88d22 100%);
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 3px;
     font-family: 'Montserrat', sans-serif;
     font-size: 0.8rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    box-shadow: 0 4px 15px rgba(180, 140, 50, 0.4), 0 0 10px rgba(212, 175, 55, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Countdown Styles */
+.map-btn:hover, .map-btn:active {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(235, 195, 80, 0.6);
+}
+
+/* ==========================================================================
+   COUNTDOWN TIMER
+   ========================================================================== */
 .countdown-section {
     margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px dashed rgba(212, 175, 55, 0.2);
+    padding-top: 1.8rem;
+    border-top: 1px dashed rgba(201, 159, 50, 0.35);
 }
 
 .countdown-title {
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 0.75rem !important;
-    letter-spacing: 2px;
+    font-size: 0.78rem !important;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    margin-bottom: 1rem !important;
-    color: #a38959 !important;
+    margin-bottom: 1.2rem !important;
+    color: #8c6b1b !important;
 }
 
 .countdown {
     display: flex;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 .time-box {
-    background: transparent;
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(250, 247, 240, 0.9);
+    border: 1px solid rgba(201, 159, 50, 0.45);
     border-radius: 4px;
-    padding: 5px;
-    width: 55px;
+    padding: 7px 5px;
+    width: 58px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 3px 10px rgba(180, 150, 100, 0.15);
 }
 
 .time-box span {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     font-weight: 600;
-    color: #d4af37;
-    line-height: 1;
-    margin-bottom: 3px;
+    color: #8c6b1b;
+    line-height: 1.1;
+    margin-bottom: 2px;
 }
 
 .time-box small {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.55rem;
-    color: #a38959;
+    color: #786445;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .footer-text {
-    margin-top: 2.5rem;
-    font-size: 1.3rem;
+    margin-top: 2.6rem;
+    font-size: 1.4rem;
     font-style: italic;
-    color: #d4af37;
+    color: #8c2236;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
 }
 
-/* Internal Card Animations Triggered by JS */
-.opened .age-accent { animation: fadeUp 0.8s 0.2s forwards ease-out; }
-.opened .header h2 { animation: fadeUp 0.8s 0.3s forwards ease-out; }
-.opened .divider { animation: expandLine 1s 0.4s forwards ease-out; }
-.opened .text-1 { animation: fadeUp 0.8s 0.5s forwards ease-out; }
-.opened .text-2 { animation: fadeUp 0.8s 0.6s forwards ease-out; }
-.opened .name { animation: fadeUp 0.8s 0.7s forwards ease-out; }
-.opened .text-3 { animation: fadeUp 0.8s 0.8s forwards ease-out; }
-.opened .detail-1 { animation: fadeUp 0.8s 0.9s forwards ease-out; }
-.opened .detail-2 { animation: fadeUp 0.8s 1.0s forwards ease-out; }
-.opened .detail-3 { animation: fadeUp 0.8s 1.1s forwards ease-out; }
-.opened .detail-4 { animation: fadeUp 0.8s 1.2s forwards ease-out; }
-.opened .footer-text { animation: fadeUp 0.8s 1.3s forwards ease-out; }
+/* ==========================================================================
+   INTERNAL CARD STAGGERED REVEAL ANIMATIONS
+   ========================================================================== */
+.opened .age-accent { animation: luxuryFadeUp 0.85s 0.15s forwards ease-out; }
+.opened .header h2 { animation: luxuryFadeUp 0.85s 0.25s forwards ease-out; }
+.opened .divider { animation: luxuryExpand 1s 0.35s forwards ease-out; }
+.opened .text-1 { animation: luxuryFadeUp 0.85s 0.45s forwards ease-out; }
+.opened .text-2 { animation: luxuryFadeUp 0.85s 0.55s forwards ease-out; }
+.opened .name { animation: luxuryFadeUp 0.85s 0.65s forwards ease-out; }
+.opened .text-3 { animation: luxuryFadeUp 0.85s 0.75s forwards ease-out; }
+.opened .detail-1 { animation: luxuryFadeUp 0.85s 0.85s forwards ease-out; }
+.opened .detail-2 { animation: luxuryFadeUp 0.85s 0.95s forwards ease-out; }
+.opened .detail-3 { animation: luxuryFadeUp 0.85s 1.05s forwards ease-out; }
+.opened .detail-4 { animation: luxuryFadeUp 0.85s 1.15s forwards ease-out; }
+.opened .footer-text { animation: luxuryFadeUp 0.85s 1.25s forwards ease-out; }
 
-@keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
+@keyframes luxuryFadeUp {
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
-@keyframes expandLine {
+
+@keyframes luxuryExpand {
     to { opacity: 1; width: 60%; }
 }
 
-/* Butterfly Wipe Transition Layer */
-.butterfly-wipe {
-    position: absolute; /* FIXED CRASH: Absolute positions within hidden body */
-    top: 0; left: -120%;
-    width: 150%; height: 100vh;
-    background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.1), #1a1a1a, #050505);
-    z-index: 9999;
-    pointer-events: none;
-    transform: skewX(-15deg);
-}
-
-.wipe-active {
-    animation: wipeAcross 2s forwards ease-in-out;
-}
-@keyframes wipeAcross {
-    0% { left: -150%; }
-    100% { left: 150%; }
-}
-
-/* Individual CSS Butterflies */
-.flying-butterfly {
-    position: absolute;
-    width: 30px; height: 30px;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="%23d4af37" d="M62.6,21.8c-0.8-2.6-2.5-4.6-4.9-5.7c-2.4-1.1-5.1-1.1-7.5-0.1c-6,2.6-11.8,5.4-17.6,8.2 c-0.6,0.3-1.2,0.3-1.8,0c-5.8-2.8-11.6-5.6-17.6-8.2c-2.4-1-5.1-1-7.5,0.1c-2.4,1.1-4.1,3.1-4.9,5.7c-0.7,2.5-0.5,5.2,0.6,7.5 c2,4,4.2,7.9,6.5,11.7c2.2,3.6,4.6,7,7.2,10.3c1,1.3,2.2,2.4,3.7,3.1c1.5,0.7,3.2,0.9,4.8,0.6c1.6-0.3,3.1-1,4.3-2.1 c1.2-1.1,2.1-2.5,2.6-4c1.1-3.3,1.9-6.6,2.5-10c0.6,3.4,1.4,6.7,2.5,10c0.5,1.5,1.4,2.9,2.6,4c1.2,1.1,2.7,1.8,4.3,2.1 c1.6,0.3,3.3,0.1,4.8-0.6c1.5-0.7,2.7-1.8,3.7-3.1c2.6-3.3,5-6.7,7.2-10.3c2.3-3.8,4.5-7.7,6.5-11.7C63.1,27,63.3,24.3,62.6,21.8z"/></svg>') no-repeat center center/contain;
-    animation: wingFlap 0.2s infinite alternate;
-}
-@keyframes wingFlap {
-    0% { transform: scaleX(1); }
-    100% { transform: scaleX(0.2); }
-}
-
-/* Gold Sparkles */
+/* Hidden YouTube Audio Container */
 #player-container {
-    position: absolute; width: 0; height: 0; opacity: 0; overflow: hidden; pointer-events: none;
+    position: absolute;
+    width: 1px; height: 1px;
+    opacity: 0.01;
+    overflow: hidden;
+    pointer-events: none;
+    bottom: 0; left: 0;
 }
 
-.effect-container {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000;
-}
-
-.sparkle {
-    position: absolute; bottom: -10px; width: 3px; height: 3px; background: #d4af37;
-    border-radius: 50%; box-shadow: 0 0 5px 1px rgba(212, 175, 55, 0.5);
-    animation: floatUp linear forwards; opacity: 0;
-}
-@keyframes floatUp {
-    0% { transform: translateY(0) scale(0.5); opacity: 0; }
-    20% { opacity: 0.8; }
-    80% { opacity: 0.8; }
-    100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
-}
-
-/* Mobile Adjustments */
+/* ==========================================================================
+   MOBILE SCREEN RESPONSIVENESS
+   ========================================================================== */
 @media (max-width: 600px) {
-    .cover-frame { padding: 3rem 1.5rem; max-width: 90%; }
-    .cover-title { font-size: 2.2rem; }
-    .cover-subtitle { font-size: 0.85rem; }
-    .vine-roots { width: 140px; height: 140px; }
-    .top-left { top: -30px; left: -30px; }
-    .bottom-right { bottom: -30px; right: -30px; }
+    .music-toggle-btn {
+        top: 14px;
+        right: 14px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .cover-frame {
+        padding: 3.2rem 1.4rem;
+        max-width: 86%;
+    }
+    .cover-title {
+        font-size: 2.3rem;
+    }
+    .cover-subtitle {
+        font-size: 0.78rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Resized roses for mobile screens */
+    .corner-rose {
+        width: 60px;
+        height: 60px;
+    }
+    .tl-main { top: -30px; left: -30px; }
+    .tr-main { top: -30px; right: -30px; }
+    .br-main { bottom: -30px; right: -30px; }
+    .bl-main { bottom: -30px; left: -30px; }
+
+    .cluster-rose {
+        width: 44px;
+        height: 44px;
+    }
+    .tl-cluster { top: -18px; left: 22px; }
+    .tr-cluster { top: 22px; right: -18px; }
+    .br-cluster { bottom: -18px; right: 22px; }
+    .bl-cluster { bottom: 22px; left: -22px; }
+
+    .edge-rose {
+        width: 42px;
+        height: 42px;
+    }
+    .top-mid { top: -21px; margin-left: -21px; }
+    .right-mid { right: -21px; margin-top: -21px; }
+    .bottom-mid { bottom: -21px; margin-left: -21px; }
+    .left-mid { left: -21px; margin-top: -21px; }
+
+    .invitation-container {
+        padding: 2rem 0.8rem 3rem;
+    }
+    .invitation-card {
+        padding: 2.6rem 1.2rem;
+    }
+    .age-accent {
+        font-size: 3.6rem;
+    }
+    .name {
+        font-size: 2.7rem;
+    }
+    .countdown {
+        gap: 6px;
+    }
+    .time-box {
+        width: 52px;
+        padding: 6px 3px;
+    }
+    .time-box span {
+        font-size: 1.25rem;
+    }
 }
