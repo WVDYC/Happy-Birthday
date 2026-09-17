@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зейнеп Аменова - 70 жас мерейтойы</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Global Effect Container for Gold Sparkles (Starts immediately) -->
+    <div class="effect-container" id="effects"></div>
+
+    <!-- Cover Screen -->
+    <div id="cover" class="cover-screen">
+        <div class="cover-bg"></div>
+        <div class="cover-content">
+            <div class="roses-overlay"></div>
+            <div class="cover-text-wrapper">
+                <h1 class="cover-title">Шақыру билеті</h1>
+                <p class="cover-subtitle">Зейнеп Аменованың<br>70 жасқа толған мерейтойы</p>
+                <button id="openBtn" class="open-btn">Ашу</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Invitation -->
+    <div id="invitation" class="invitation-container">
+        
+        <div class="invitation-card">
+            <div class="card-border"></div>
+            
+            <div class="age-accent">70</div>
+            
+            <div class="header">
+                <h2>Жас Мерейтой</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="main-text">
+                <p class="text-1">Құрметті ағайын-туыс, құда-жекжат,<br>бауырлар, достар!</p>
+                <p class="text-2">Сіздерді аяулы анамыз, ардақты әжеміз</p>
+                <h1 class="name">Зейнептің</h1>
+                <p class="text-3">70 жасқа толған мерейтойына арналған ақ дастарханымыздың қадірлі қонағы болуға шақырамыз!</p>
+            </div>
+
+            <div class="details">
+                <div class="detail-item detail-1">
+                    <h3>Күні</h3>
+                    <p>01 қараша 2026 жыл</p>
+                </div>
+                <div class="detail-item detail-2">
+                    <h3>Уақыты</h3>
+                    <p>17:00</p>
+                </div>
+                <div class="detail-item detail-3">
+                    <h3>Мекен-жайы</h3>
+                    <p>Астана қаласы<br>«Томирис» мейрамханасы</p>
+                    <a href="https://2gis.kz/astana/geo/70000001047392718/71.510061,51.140464" target="_blank" class="map-btn">Картадан көру (2GIS)</a>
+                </div>
+                
+                <!-- Countdown Timer -->
+                <div class="detail-item detail-4 countdown-section">
+                    <h3 class="countdown-title">Тойдың басталуына қалды:</h3>
+                    <div class="countdown" id="countdown">
+                        <div class="time-box">
+                            <span id="days">00</span>
+                            <small>Күн</small>
+                        </div>
+                        <div class="time-box">
+                            <span id="hours">00</span>
+                            <small>Сағат</small>
+                        </div>
+                        <div class="time-box">
+                            <span id="minutes">00</span>
+                            <small>Минут</small>
+                        </div>
+                        <div class="time-box">
+                            <span id="seconds">00</span>
+                            <small>Секунд</small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="footer-text">
+                Келіңіздер, қуанышымызға<br>ортақ болыңыздар!
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden YouTube Audio Player (Changed to lyrical Happy Birthday) -->
+    <div id="player-container">
+        <iframe id="youtubePlayer" 
+                src="https://www.youtube.com/embed?listType=search&list=Туған+күніңмен+лирическая+версия+ән&enablejsapi=1&loop=1" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+        </iframe>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

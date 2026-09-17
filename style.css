@@ -1,0 +1,441 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: #1a1614;
+    color: #3b3024;
+    overflow: hidden; 
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+/* Base Cover */
+.cover-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    overflow: hidden;
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.cover-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('assets/bg.jpg') no-repeat center center/cover;
+    animation: kenburns 20s infinite alternate linear;
+    z-index: 0;
+}
+
+@keyframes kenburns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+}
+
+.cover-bg::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 253, 248, 0.5); 
+    z-index: 1;
+}
+
+.cover-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.97); /* Solid enough for multiply blend */
+    padding: 5rem 3rem; /* Extra padding so text fits inside the wreath */
+    border-radius: 12px;
+    border: 1px solid #d4af37;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2), 0 0 40px rgba(212, 175, 55, 0.1);
+    max-width: 92%;
+    width: 500px;
+    transition: opacity 0.6s ease;
+    animation: floatingCover 4s ease-in-out infinite;
+    overflow: hidden; /* Keep roses neatly inside */
+}
+
+.roses-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('assets/roses.jpg') no-repeat center center/cover;
+    mix-blend-mode: multiply;
+    opacity: 0.9;
+    z-index: 1;
+    pointer-events: none;
+    transform: scale(1.1); /* ensures the edges are nicely trimmed */
+}
+
+.cover-text-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes floatingCover {
+    0% { transform: translateY(0px); box-shadow: 0 10px 40px rgba(0,0,0,0.2), 0 0 20px rgba(212, 175, 55, 0.1); }
+    50% { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.2), 0 0 40px rgba(212, 175, 55, 0.3); }
+    100% { transform: translateY(0px); box-shadow: 0 10px 40px rgba(0,0,0,0.2), 0 0 20px rgba(212, 175, 55, 0.1); }
+}
+
+.cover-title {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: #ab8537;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.cover-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #695642;
+}
+
+.open-btn {
+    font-family: 'Montserrat', sans-serif;
+    background: #ab8537;
+    color: #fff;
+    border: 1px solid #ab8537;
+    padding: 14px 40px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(171, 133, 55, 0.4);
+}
+
+.open-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(171, 133, 55, 0.6);
+}
+
+/* Button Shine Effect */
+.open-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; top: -100%; }
+    20% { left: 100%; top: 100%; }
+    100% { left: 100%; top: 100%; }
+}
+
+
+/* Animations for Cover */
+.cover-screen.fade-out-content .cover-content {
+    opacity: 0;
+}
+.cover-screen.slide-up {
+    transform: translateY(-100%);
+}
+
+/* Invitation Container */
+.invitation-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0; left: 0;
+    background: url('assets/bg.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem 1rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.invitation-container::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+}
+
+.invitation-container.visible {
+    opacity: 1;
+}
+
+.invitation-card {
+    background: rgba(255, 253, 248, 0.96);
+    max-width: 550px;
+    width: 100%;
+    padding: 4rem 3rem;
+    border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    text-align: center;
+    border: 1px solid #e2d2b3;
+    position: relative;
+    z-index: 10;
+    margin: auto;
+}
+
+/* Inner Kazakh pattern accents */
+.card-border {
+    position: absolute;
+    top: 15px; left: 15px; right: 15px; bottom: 15px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    pointer-events: none;
+    border-radius: 4px;
+}
+
+/* Typography */
+.age-accent {
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #ab8537;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.header h2 {
+    font-size: 1.5rem;
+    color: #3b3024;
+    margin-bottom: 1.5rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 400;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.divider {
+    width: 0;
+    height: 1px;
+    background: #ab8537;
+    margin: 0 auto 2.5rem;
+    opacity: 0;
+}
+
+.main-text p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: #4a3e30;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.name {
+    font-size: 3.5rem;
+    color: #8c2a32;
+    margin: 1.5rem 0;
+    font-style: italic;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.details {
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    position: relative;
+}
+
+.detail-item {
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.detail-item h3 {
+    font-size: 1.2rem;
+    color: #ab8537;
+    margin-bottom: 0.3rem;
+    font-style: italic;
+}
+
+.detail-item p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2b231a;
+}
+
+.map-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 10px 25px;
+    background: transparent;
+    color: #ab8537;
+    text-decoration: none;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid #ab8537;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.map-btn:hover {
+    background-color: #ab8537;
+    color: #fff;
+}
+
+/* Countdown Styles */
+.countdown-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px dashed rgba(212, 175, 55, 0.3);
+}
+
+.countdown-title {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem !important;
+    color: #695642 !important;
+    font-style: normal !important;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.time-box {
+    background: #fff;
+    border: 1px solid #e2d2b3;
+    border-radius: 8px;
+    padding: 10px;
+    width: 70px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-box span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ab8537;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.time-box small {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+.footer-text {
+    margin-top: 3.5rem;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #ab8537;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Advanced Cinematic Animations Triggered by JS */
+.opened .age-accent { animation: fadeUp 0.8s 0.2s forwards ease-out; }
+.opened .header h2 { animation: fadeUp 0.8s 0.4s forwards ease-out; }
+.opened .divider { animation: expandLine 1s 0.6s forwards ease-out; }
+.opened .text-1 { animation: fadeUp 0.8s 0.8s forwards ease-out; }
+.opened .text-2 { animation: fadeUp 0.8s 1.0s forwards ease-out; }
+.opened .name { animation: fadeUp 0.8s 1.2s forwards ease-out; }
+.opened .text-3 { animation: fadeUp 0.8s 1.4s forwards ease-out; }
+.opened .detail-1 { animation: fadeUp 0.8s 1.6s forwards ease-out; }
+.opened .detail-2 { animation: fadeUp 0.8s 1.8s forwards ease-out; }
+.opened .detail-3 { animation: fadeUp 0.8s 2.0s forwards ease-out; }
+.opened .detail-4 { animation: fadeUp 0.8s 2.2s forwards ease-out; }
+.opened .footer-text { animation: fadeUp 0.8s 2.5s forwards ease-out; }
+
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes expandLine {
+    to { opacity: 1; width: 60%; }
+}
+
+/* Effects & Particles (Gold Sparkles) */
+#player-container {
+    position: absolute;
+    width: 0; height: 0; opacity: 0;
+    overflow: hidden; pointer-events: none;
+}
+
+.effect-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1000; /* Stays on top of cover and inside card */
+}
+
+.sparkle {
+    position: absolute;
+    bottom: -10px;
+    width: 3px; height: 3px;
+    background: #d4af37;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 2px rgba(212, 175, 55, 0.8);
+    animation: floatUp linear forwards;
+    opacity: 0;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+}
+
+@media (max-width: 600px) {
+    .cover-content { padding: 4.5rem 1.5rem; }
+    .cover-title { font-size: 2.2rem; }
+    .cover-subtitle { font-size: 0.85rem; margin-bottom: 2rem; }
+    
+    .invitation-container { padding: 1.5rem 0.5rem; }
+    .invitation-card { padding: 3rem 1rem; border-radius: 4px; }
+    
+    .age-accent { font-size: 3.5rem; }
+    .header h2 { font-size: 1.2rem; margin-bottom: 1rem; }
+    .name { font-size: 2.6rem; margin: 1rem 0; }
+    .main-text p { font-size: 0.95rem; }
+    
+    .countdown-title { font-size: 0.75rem !important; }
+    .countdown { gap: 6px; }
+    .time-box { width: 55px; padding: 8px 5px; }
+    .time-box span { font-size: 1.3rem; }
+    .time-box small { font-size: 0.5rem; }
+    
+    .footer-text { font-size: 1.2rem; }
+}
